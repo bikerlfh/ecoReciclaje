@@ -82,38 +82,30 @@ public class MenuPrincipal extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
 
         // Handle navigation view item clicks here.
-
-        int id = item.getItemId();
-
-        if (id == R.id.nav_informacion) {
-            Intent intent = new Intent(MenuPrincipal.this, InformacionActivity.class);
-            startActivity(intent);
-            finish();
-
-        } else if (id == R.id.nav_tips) {
-            Intent intent = new Intent(MenuPrincipal.this, TipsActivity.class);
-            startActivity(intent);
-            finish();
-
-        } else if (id == R.id.nav_manualidades) {
-            Intent intent = new Intent(MenuPrincipal.this, ManualidadesActivity.class);
-            startActivity(intent);
-            finish();
-
-        } else if (id == R.id.nav_reciclaje) {
-            Intent intent = new Intent(MenuPrincipal.this, ReciclajeActivity.class);
-            startActivity(intent);
-            finish();
-
-        } else if (id == R.id.nav_lugares) {
-            Intent intent = new Intent(MenuPrincipal.this, LugaresActivity.class);
-            startActivity(intent);
-            finish();
+        Intent intent = null;
+        switch (item.getItemId())
+        {
+            case R.id.nav_informacion:
+                intent = new Intent(MenuPrincipal.this, InformacionActivity.class);
+            break;
+            case R.id.nav_tips:
+                intent = new Intent(MenuPrincipal.this, TipsActivity.class);
+            break;
+            case R.id.nav_manualidades:
+                intent = new Intent(MenuPrincipal.this, ManualidadesActivity.class);
+            break;
+            case R.id.nav_reciclaje:
+                intent = new Intent(MenuPrincipal.this, ReciclajeActivity.class);
+            break;
+            case R.id.nav_lugares:
+                intent = new Intent(MenuPrincipal.this, LugaresActivity.class);
+            break;
         }
+        startActivity(intent);
+        //finish();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-
         return true;
     }
 
