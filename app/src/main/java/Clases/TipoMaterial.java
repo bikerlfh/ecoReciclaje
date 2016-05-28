@@ -69,7 +69,7 @@ public class TipoMaterial
     {
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.Select(TipoMaterialModel.NAME_TABLE, new String[] { TipoMaterialModel.COLUMN_ID,TipoMaterialModel.COLUMN_DESCRIPCION },TipoMaterialModel.COLUMN_ID + "=?",new String[] {String.valueOf(idTipoMaterial)},null,null,null,null);
+        Cursor c = dbManager.Select(TipoMaterialModel.NAME_TABLE, new String[] { "*" },TipoMaterialModel.COLUMN_ID + "=?",new String[] {String.valueOf(idTipoMaterial)},null,null,null,null);
         // Si hay Tipo Informacion
         if (c.moveToFirst())
         {
@@ -85,7 +85,7 @@ public class TipoMaterial
         List<TipoMaterial> ListadoTipoMaterial = new ArrayList<TipoMaterial>();
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.Select(TipoMaterialModel.NAME_TABLE, new String[] { TipoMaterialModel.COLUMN_ID,TipoMaterialModel.COLUMN_DESCRIPCION },null,null,null,null,null,null);
+        Cursor c = dbManager.Select(TipoMaterialModel.NAME_TABLE, new String[] { "*" },null,null,null,null,null,null);
         // Si hay Tipo Informacion
         if (c.moveToFirst())
         {

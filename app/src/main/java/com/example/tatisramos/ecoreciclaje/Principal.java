@@ -34,7 +34,7 @@ public class Principal extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        this.deleteDatabase("ecoreciclaje.sqlite");
+        //this.deleteDatabase("ecoreciclaje.sqlite");
 
         new AsyncSincronizar().execute("", "", "");
         /*new Handler().postDelayed(new Runnable() {

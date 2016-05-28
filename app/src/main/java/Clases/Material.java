@@ -75,10 +75,7 @@ public class Material {
     {
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.Select(MaterialModel.NAME_TABLE, new String[] { MaterialModel.COLUMN_ID,
-                                                                             MaterialModel.COLUMN_ID_TIPO_MATERIAL,
-                                                                             MaterialModel.COLUMN_CODIGO,
-                                                                             MaterialModel.COLUMN_NOMBRE },MaterialModel.COLUMN_ID + "=?",new String[] {String.valueOf(idMaterial)},null,null,null,null);
+        Cursor c = dbManager.Select(MaterialModel.NAME_TABLE, new String[] { "*" },MaterialModel.COLUMN_ID + "=?",new String[] {String.valueOf(idMaterial)},null,null,null,null);
         // Si hay Tipo Informacion
         if (c.moveToFirst())
         {
@@ -107,11 +104,31 @@ public class Material {
         List<Material> ListadoMaterial = new ArrayList<Material>();
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.Select(MaterialModel.NAME_TABLE, new String[] { MaterialModel.COLUMN_ID,
-                                                                             MaterialModel.COLUMN_ID_TIPO_MATERIAL,
-                                                                             MaterialModel.COLUMN_CODIGO,
-                                                                             MaterialModel.COLUMN_NOMBRE },null,null,null,null,null,null);
+        Cursor c = dbManager.Select(MaterialModel.NAME_TABLE, new String[] { "*" },null,null,null,null,null,null);
         // Si hay Tipo Informacion
+        if (c.moveToFirst())
+        {
+            // Recorremos el cursor y llenamos el Objeto mat el cual se agrega a la ListadoMaterial
+            do
+            {
+                Material mat = new Material(this.dbManager.context);
+                mat.idMaterial = idMaterial;
+                mat.idTipoMaterial = c.getInt(c.getColumnIndex(MaterialModel.COLUMN_ID_TIPO_MATERIAL));
+                mat.codigo = c.getString(c.getColumnIndex(MaterialModel.COLUMN_CODIGO));
+                mat.nombre = c.getString(c.getColumnIndex(MaterialModel.COLUMN_NOMBRE));
+                ListadoMaterial.add(mat);
+            }
+            while (c.moveToNext());
+        }
+        return ListadoMaterial;
+    }
+
+    public List<Material> consultarMaterialPoridTipoMaterial(int idTipoMaterial)
+    {
+        List<Material> ListadoMaterial = new ArrayList<Material>();
+        // Se realiza la consulta a la base de datos.
+        // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
+        Cursor c = dbManager.Select(MaterialModel.NAME_TABLE, new String[] { "*" },MaterialModel.COLUMN_ID_TIPO_MATERIAL + "=?",new String[] {String.valueOf(idTipoMaterial)},null,null,null,null);
         if (c.moveToFirst())
         {
             // Recorremos el cursor y llenamos el Objeto mat el cual se agrega a la ListadoMaterial

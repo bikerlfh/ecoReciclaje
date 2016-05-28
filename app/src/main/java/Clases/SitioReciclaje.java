@@ -95,12 +95,7 @@ public class SitioReciclaje {
     {
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[] { SitioReciclajeModel.COLUMN_ID,
-                                                                                   SitioReciclajeModel.COLUMN_NOMBRE,
-                                                                                   SitioReciclajeModel.COLUMN_DIRECCION,
-                                                                                   SitioReciclajeModel.COLUMN_PROPIETARIO,
-                                                                                   SitioReciclajeModel.COLUMN_LATITUD,
-                                                                                   SitioReciclajeModel.COLUMN_LONGITUD},SitioReciclajeModel.COLUMN_ID + "=?",new String[] {String.valueOf(idSitioReciclaje)},null,null,null,null);
+        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[] { "*" },SitioReciclajeModel.COLUMN_ID + "=?",new String[] {String.valueOf(idSitioReciclaje)},null,null,null,null);
         // Si hay Tipo Informacion
         if (c.moveToFirst())
         {
@@ -131,12 +126,7 @@ public class SitioReciclaje {
         List<SitioReciclaje> ListadoSitioReciclaje = new ArrayList<SitioReciclaje>();
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos
-        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[] { SitioReciclajeModel.COLUMN_ID,
-                                                                            SitioReciclajeModel.COLUMN_NOMBRE,
-                                                                            SitioReciclajeModel.COLUMN_DIRECCION,
-                                                                            SitioReciclajeModel.COLUMN_PROPIETARIO,
-                                                                            SitioReciclajeModel.COLUMN_LATITUD,
-                                                                            SitioReciclajeModel.COLUMN_LONGITUD },null,null,null,null,null,null);
+        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[] { "*" },null,null,null,null,null,null);
         // Si hay Tipo Informacion
         if (c.moveToFirst())
         {

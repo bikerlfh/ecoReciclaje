@@ -55,7 +55,7 @@ public class TipoInformacion {
     {
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.Select(TipoInformacionModel.NAME_TABLE, new String[] { TipoInformacionModel.COLUMN_ID,TipoInformacionModel.COLUMN_DESCRIPCION },TipoInformacionModel.COLUMN_ID + "=?",new String[] {String.valueOf(idTipoInformacion)},null,null,null,null);
+        Cursor c = dbManager.Select(TipoInformacionModel.NAME_TABLE, new String[] { "*" },TipoInformacionModel.COLUMN_ID + "=?",new String[] {String.valueOf(idTipoInformacion)},null,null,null,null);
         // Si hay Tipo Informacion
         if (c.moveToFirst())
         {
@@ -81,7 +81,7 @@ public class TipoInformacion {
         List<TipoInformacion> ListadoTipoInformacion = new ArrayList<TipoInformacion>();
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.Select(TipoInformacionModel.NAME_TABLE, new String[] { TipoInformacionModel.COLUMN_ID,TipoInformacionModel.COLUMN_DESCRIPCION },null,null,null,null,null,null);
+        Cursor c = dbManager.Select(TipoInformacionModel.NAME_TABLE, new String[] { "*" },null,null,null,null,null,null);
         // Si hay Tipo Informacion
         if (c.moveToFirst())
         {

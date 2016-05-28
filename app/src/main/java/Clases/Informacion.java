@@ -11,6 +11,7 @@ import Model.InformacionModel;
 
 /**
  * Created by TatisRamos on 13/05/2016.
+ * Modificated by Luis Fernando Henriquez Arciniegas on 25/08/2016
  */
 public class Informacion
 {
@@ -98,6 +99,12 @@ public class Informacion
             return false;
         }
     }
+
+    /**
+     * Retorna el Max idInformacion.
+     * Este metodo se utiliza para comparar los datos de la base de datos local con los del servidor
+     * @return Max(idInformacion)
+     */
     public int consultarMaxId()
     {
         Cursor c = dbManager.RawQuery("SELECT MAX("+InformacionModel.COLUMN_ID+") AS "+InformacionModel.COLUMN_ID+" FROM "+InformacionModel.NAME_TABLE,null);
@@ -108,31 +115,99 @@ public class Informacion
         }
         return 0;
     }
+
+    public  Boolean consultarInformacionPorId(int idInformacion)
+    {
+        Cursor c = dbManager.Select(InformacionModel.NAME_TABLE,new String[] { "*" },InformacionModel.COLUMN_ID + "=?",new String[] {String.valueOf(idInformacion)},null,null,null,null);
+        if (c.moveToFirst())
+        {
+            this.idInformacion = c.getInt(c.getColumnIndex(InformacionModel.COLUMN_ID));
+            this.idTipoInformacion = c.getInt(c.getColumnIndex(InformacionModel.COLUMN_ID_TIPO_INFORMACION));
+            this.idMaterial = c.getInt(c.getColumnIndex(InformacionModel.COLUMN_ID_MATERIAL));
+            this.titulo = c.getString(c.getColumnIndex(InformacionModel.COLUMN_TITULO));
+            this.descripcion = c.getString(c.getColumnIndex(InformacionModel.COLUMN_DESCRIPCION));
+            this.fecha = c.getString(c.getColumnIndex(InformacionModel.COLUMN_FECHA));
+            c.close();
+            return true;
+        }
+        c.close();
+        return false;
+    }
+
     public List<Informacion> consultarTodoInformacion()
     {
         List<Informacion> ListadoInformacion = new ArrayList<Informacion>();
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.Select(InformacionModel.NAME_TABLE, new String[] { InformacionModel.COLUMN_ID,InformacionModel.COLUMN_ID_TIPO_INFORMACION,InformacionModel.COLUMN_ID_MATERIAL,
-                                                                                InformacionModel.COLUMN_TITULO,InformacionModel.COLUMN_DESCRIPCION,
-                                                                                InformacionModel.COLUMN_FECHA},null,null,null,null,InformacionModel.COLUMN_ID,null);
+        Cursor c = dbManager.Select(InformacionModel.NAME_TABLE, new String[] { "*" },null,null,null,null,InformacionModel.COLUMN_ID,null);
         // Si hay informacion
         if (c.moveToFirst())
         {
             // Recorremos el cursor y llenamos el Objeto inf el cual se agrega a la ListaInformacion
             do
             {
-                Informacion inf = new Informacion(this.dbManager.context);
-                inf.idInformacion = c.getInt(c.getColumnIndex(InformacionModel.COLUMN_ID));
-                inf.idTipoInformacion = c.getInt(c.getColumnIndex(InformacionModel.COLUMN_ID_TIPO_INFORMACION));
-                inf.idMaterial = c.getInt(c.getColumnIndex(InformacionModel.COLUMN_ID_MATERIAL));
-                inf.titulo = c.getString(c.getColumnIndex(InformacionModel.COLUMN_TITULO));
-                inf.descripcion = c.getString(c.getColumnIndex(InformacionModel.COLUMN_DESCRIPCION));
-                inf.fecha = c.getString(c.getColumnIndex(InformacionModel.COLUMN_FECHA));
-                ListadoInformacion.add(inf);
+                ListadoInformacion.add(this.CrearObjetoInformacion(c));
             }
            while (c.moveToNext());
         }
+        c.close();
         return ListadoInformacion;
+    }
+
+    public List<Informacion> consultarInformacionPorIdTipoInformacion(int idTipoInformacion)
+    {
+        List<Informacion> ListadoInformacion = new ArrayList<Informacion>();
+        // Se realiza la consulta a la base de datos.
+        // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
+        Cursor c = dbManager.Select(InformacionModel.NAME_TABLE, new String[] { "*" },InformacionModel.COLUMN_ID_TIPO_INFORMACION+"=?",new String[] {String.valueOf(idTipoInformacion)},null,null,InformacionModel.COLUMN_ID,null);
+        // Si hay informacion
+        if (c.moveToFirst())
+        {
+            // Recorremos el cursor y llenamos el Objeto inf el cual se agrega a la ListaInformacion
+            do
+            {
+                ListadoInformacion.add(this.CrearObjetoInformacion(c));
+            }
+            while (c.moveToNext());
+        }
+        c.close();
+        return ListadoInformacion;
+    }
+
+    public List<Informacion> consultarInformacionPorIdTipoMaterial(int idTipoMaterial)
+    {
+        List<Informacion> ListadoInformacion = new ArrayList<Informacion>();
+        // Se realiza la consulta a la base de datos.
+        // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
+        Cursor c = dbManager.Select(InformacionModel.NAME_TABLE, new String[] { "*" },InformacionModel.COLUMN_ID_MATERIAL+"=?",new String[] {String.valueOf(idMaterial)},null,null,InformacionModel.COLUMN_ID,null);
+        // Si hay informacion
+        if (c.moveToFirst())
+        {
+            // Recorremos el cursor y llenamos el Objeto inf el cual se agrega a la ListaInformacion
+            do
+            {
+                ListadoInformacion.add(this.CrearObjetoInformacion(c));
+            }
+            while (c.moveToNext());
+        }
+        c.close();
+        return ListadoInformacion;
+    }
+
+    /**
+     * CrearObjetoInformacion devuelve un objeto el cual se esta creando dependiendo del cursor.
+     * @param cursor es el cursor que se esta recorriendo para crear el objeto Informacion
+     * @return
+     */
+    private Informacion CrearObjetoInformacion(Cursor cursor)
+    {
+        Informacion inf = new Informacion(this.dbManager.context);
+        inf.idInformacion = cursor.getInt(cursor.getColumnIndex(InformacionModel.COLUMN_ID));
+        inf.idTipoInformacion = cursor.getInt(cursor.getColumnIndex(InformacionModel.COLUMN_ID_TIPO_INFORMACION));
+        inf.idMaterial = cursor.getInt(cursor.getColumnIndex(InformacionModel.COLUMN_ID_MATERIAL));
+        inf.titulo = cursor.getString(cursor.getColumnIndex(InformacionModel.COLUMN_TITULO));
+        inf.descripcion = cursor.getString(cursor.getColumnIndex(InformacionModel.COLUMN_DESCRIPCION));
+        inf.fecha = cursor.getString(cursor.getColumnIndex(InformacionModel.COLUMN_FECHA));
+        return inf;
     }
 }
