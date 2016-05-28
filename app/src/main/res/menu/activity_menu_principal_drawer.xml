@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_informacion"
+            android:icon="@drawable/ic_inf"
+            android:title="Informacion" />
+        <item
+            android:id="@+id/nav_tips"
+            android:icon="@drawable/ic_tips"
+            android:title="Tips" />
+        <item
+            android:id="@+id/nav_manualidades"
+            android:icon="@drawable/ic_man"
+            android:title="Manualidades" />
+        <item
+            android:id="@+id/nav_reciclaje"
+            android:icon="@drawable/ic_recy"
+            android:title="Reciclaje" />
+        <item
+            android:id="@+id/nav_lugares"
+            android:icon="@drawable/ic_lugar"
+            android:title="Lugares" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+        </menu>
+    </item>
+
+
+</menu>
