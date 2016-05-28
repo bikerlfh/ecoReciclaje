@@ -26,7 +26,8 @@ import Clases.WebService;
 
 public class Principal extends AppCompatActivity {
 
-    private final int DURACION_SPLASH = 2000;
+    //private final int DURACION_SPLASH = 2000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
