@@ -28,12 +28,14 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
+                android:src="@drawable/ic_man"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/lbl_titulo_informacion"
+                android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/imgIformacion"
                 android:layout_alignParentTop="true"
                 android:textSize="20sp"

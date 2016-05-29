@@ -24,14 +24,14 @@ public class RvAdapterInformacion extends RecyclerView.Adapter<RvAdapterInformac
         CardView cvInformacion;
         TextView titulo;
         TextView fecha;
-        //ImageView imagen;
+        ImageView imagen;
 
         InformacionViewHolder(View itemView) {
             super(itemView);
             cvInformacion = (CardView)itemView.findViewById(R.id.cvInformacion);
             titulo = (TextView)itemView.findViewById(R.id.lbl_titulo_informacion);
             fecha = (TextView)itemView.findViewById(R.id.lbl_fecha_informacion);
-            //imagen = (ImageView)itemView.findViewById(R.id.imgIformacion);
+            imagen = (ImageView)itemView.findViewById(R.id.imgIformacion);
         }
     }
     //List<Informacion> ListaInformacion;
@@ -56,7 +56,7 @@ public class RvAdapterInformacion extends RecyclerView.Adapter<RvAdapterInformac
             Informacion info = Busqueda.ListadoInformacion.get(i);
             informacionViewHolder.titulo.setText(info.getTitulo());
             informacionViewHolder.fecha.setText(info.getFecha());
-            //informacionViewHolder.imagen.setImageResource(Busqueda.ListadoInformacion.get(i).getIdMaterial());
+            informacionViewHolder.imagen.setImageResource(info.tipoInformacion.imagen);
     }
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {

@@ -25,8 +25,13 @@ public class Informacion
     private DbManager dbManager;
     private ContentValues contentValues;
 
+    /** Propiedades Publicas */
+    public TipoInformacion tipoInformacion;
+    public TipoMaterial tipoMaterial;
+
     public Informacion(Context context) {
         dbManager= new DbManager(context);
+        this.tipoInformacion = new TipoInformacion(context);
     }
 
      public int getIdInformacion() {
@@ -208,6 +213,7 @@ public class Informacion
         inf.titulo = cursor.getString(cursor.getColumnIndex(InformacionModel.COLUMN_TITULO));
         inf.descripcion = cursor.getString(cursor.getColumnIndex(InformacionModel.COLUMN_DESCRIPCION));
         inf.fecha = cursor.getString(cursor.getColumnIndex(InformacionModel.COLUMN_FECHA));
+        inf.tipoInformacion.consultarTipoInformacionPorId(inf.idTipoInformacion);
         return inf;
     }
 }

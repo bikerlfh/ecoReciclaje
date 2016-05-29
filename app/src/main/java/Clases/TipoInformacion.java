@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import com.example.tatisramos.ecoreciclaje.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,8 @@ public class TipoInformacion {
     private int idTipoInformacion;
     private String codigo;
     private String descripcion;
+
+    public int imagen;
 
     private DbManager dbManager;
     private ContentValues contentValues;
@@ -72,6 +76,8 @@ public class TipoInformacion {
             this.idTipoInformacion = idTipoInformacion;
             this.codigo = c.getString(c.getColumnIndex(TipoInformacionModel.COLUMN_CODIGO));
             this.descripcion = c.getString(c.getColumnIndex(TipoInformacionModel.COLUMN_DESCRIPCION));
+            this.imagen = CargarImagen(this.codigo);
+
             return true;
         }
         return false;
@@ -103,10 +109,29 @@ public class TipoInformacion {
                 inf.idTipoInformacion = c.getInt(c.getColumnIndex(TipoInformacionModel.COLUMN_ID));
                 inf.codigo = c.getString(c.getColumnIndex(TipoInformacionModel.COLUMN_CODIGO));
                 inf.descripcion = c.getString(c.getColumnIndex(TipoInformacionModel.COLUMN_DESCRIPCION));
+                inf.imagen = CargarImagen(inf.codigo);
                 ListadoTipoInformacion.add(inf);
             }
             while (c.moveToNext());
         }
         return ListadoTipoInformacion;
+    }
+
+    private int CargarImagen(String codigo)
+    {
+        int imagen = 0;
+        switch (codigo)
+        {
+            case "01":
+                imagen = R.drawable.ic_inf;
+            break;
+            case "02":
+                imagen = R.drawable.ic_tips;
+            break;
+            case "03":
+                imagen = R.drawable.ic_man;
+            break;
+        }
+        return imagen;
     }
 }
