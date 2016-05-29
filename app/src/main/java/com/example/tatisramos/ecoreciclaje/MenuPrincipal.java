@@ -86,7 +86,7 @@ public class MenuPrincipal extends AppCompatActivity
         switch (item.getItemId())
         {
             case R.id.nav_informacion:
-                intent = new Intent(MenuPrincipal.this, InformacionActivity.class);
+                intent = new Intent(MenuPrincipal.this, InformacionActivity2.class);
             break;
             case R.id.nav_tips:
                 intent = new Intent(MenuPrincipal.this, TipsActivity.class);

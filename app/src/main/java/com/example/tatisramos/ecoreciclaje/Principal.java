@@ -3,6 +3,8 @@ package com.example.tatisramos.ecoreciclaje;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,9 +36,8 @@ public class Principal extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //this.deleteDatabase("ecoreciclaje.sqlite");
+        this.deleteDatabase("ecoreciclaje.sqlite");
 
-        new AsyncSincronizar().execute("", "", "");
         /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -47,6 +48,16 @@ public class Principal extends AppCompatActivity {
 
             ;
         }, DURACION_SPLASH);*/
+
+        // Validamos el estado de internet
+        if (isOnline())
+            new AsyncSincronizar().execute("", "", "");
+        else {
+            Toast.makeText(Principal.this, "Por favor verifique su conexión a internet!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Principal.this, MenuPrincipal.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
 
@@ -76,7 +87,7 @@ public class Principal extends AppCompatActivity {
     {
         ProgressDialog pd = new ProgressDialog(Principal.this);
         SincronizarDatos sincronizarDatos = new SincronizarDatos(Principal.this);
-        String resultado = "",resTipoInfo,resTipoMaterial,resInformacion;
+        String resultado = "",resultadoSincronizacion;
         @Override
         protected void onPreExecute() {
             pd.setMessage("Sincronizando Datos ...");
@@ -87,20 +98,35 @@ public class Principal extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            resTipoInfo = sincronizarDatos.SincronizarTipoInformacion();
-            resTipoMaterial = sincronizarDatos.SincronizarTipoMaterial();
-            resInformacion = sincronizarDatos.SincronizarInformacion();
-            if (resTipoInfo.contains("Error"))
+            resultadoSincronizacion = sincronizarDatos.SincronizarTipoInformacion();
+            if (resultadoSincronizacion.contains("Error"))
             {
-                resultado = resTipoInfo + ". ";
+                resultado = resultadoSincronizacion + ". ";
             }
-            if (resTipoMaterial.contains("Error"))
+            resultadoSincronizacion = sincronizarDatos.SincronizarTipoMaterial();
+            if (resultadoSincronizacion.contains("Error"))
             {
-                resultado += resTipoMaterial+ ". ";
+                resultado += resultadoSincronizacion+ ". ";
             }
-            if (resInformacion.contains("Error"))
+            resultadoSincronizacion = sincronizarDatos.SincronizarInformacion();
+            if (resultadoSincronizacion.contains("Error"))
             {
-                resultado += resInformacion+ ". ";
+                resultado += resultadoSincronizacion+ ". ";
+            }
+            resultadoSincronizacion = sincronizarDatos.SincronizarMaterial();
+            if (resultadoSincronizacion.contains("Error"))
+            {
+                resultado += resultadoSincronizacion+ ". ";
+            }
+            resultadoSincronizacion = sincronizarDatos.SincronizarSitioReciclaje();
+            if (resultadoSincronizacion.contains("Error"))
+            {
+                resultado += resultadoSincronizacion+ ". ";
+            }
+            resultadoSincronizacion = sincronizarDatos.SincronizarSitioReciclajeMaterial();
+            if (resultadoSincronizacion.contains("Error"))
+            {
+                resultado += resultadoSincronizacion+ ". ";
             }
             return null;
         }
@@ -116,6 +142,21 @@ public class Principal extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    /***
+     *
+     * @return true si hay conexion a internet
+     */
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            return true;
+        }
+        return false;
     }
 }
 

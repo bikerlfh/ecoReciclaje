@@ -28,9 +28,9 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(TipoInformacionModel.CREATE_TABLE_TIPOINFORMACION);
         db.execSQL(TipoMaterialModel.CREATE_TABLE_TIPOMATERIAL);
         db.execSQL(InformacionModel.CREATE_TABLE_INFORMACION);
-        /*db.execSQL(MaterialModel.CREATE_TABLE_MATERIAL);
+        db.execSQL(MaterialModel.CREATE_TABLE_MATERIAL);
         db.execSQL(SitioReciclajeModel.CREATE_TABLE_SITIORECICLAJE);
-        db.execSQL(SitioReciclajeMaterialModel.CREATE_TABLE_SITIORECICLAJE);*/
+        db.execSQL(SitioReciclajeMaterialModel.CREATE_TABLE_SITIORECICLAJE);
     }
 
     @Override

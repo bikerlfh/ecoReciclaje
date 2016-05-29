@@ -16,6 +16,7 @@ import Model.TipoInformacionModel;
 public class TipoInformacion {
 
     private int idTipoInformacion;
+    private String codigo;
     private String descripcion;
 
     private DbManager dbManager;
@@ -33,6 +34,14 @@ public class TipoInformacion {
         this.idTipoInformacion = idTipoInformacion;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -41,9 +50,10 @@ public class TipoInformacion {
         this.descripcion = descripcion;
     }
 
-    public boolean insertTipoInformacion(int idTipoInformacion,String descripcion){
+    public boolean insertTipoInformacion(int idTipoInformacion,String codigo,String descripcion){
         contentValues = new ContentValues();
         contentValues.put(TipoInformacionModel.COLUMN_ID,idTipoInformacion);
+        contentValues.put(TipoInformacionModel.COLUMN_CODIGO,codigo);
         contentValues.put(TipoInformacionModel.COLUMN_DESCRIPCION,descripcion);
 
         if(dbManager.Insert(TipoInformacionModel.NAME_TABLE,contentValues))
@@ -60,6 +70,7 @@ public class TipoInformacion {
         if (c.moveToFirst())
         {
             this.idTipoInformacion = idTipoInformacion;
+            this.codigo = c.getString(c.getColumnIndex(TipoInformacionModel.COLUMN_CODIGO));
             this.descripcion = c.getString(c.getColumnIndex(TipoInformacionModel.COLUMN_DESCRIPCION));
             return true;
         }
@@ -90,6 +101,7 @@ public class TipoInformacion {
             {
                 TipoInformacion inf = new TipoInformacion(this.dbManager.context);
                 inf.idTipoInformacion = c.getInt(c.getColumnIndex(TipoInformacionModel.COLUMN_ID));
+                inf.codigo = c.getString(c.getColumnIndex(TipoInformacionModel.COLUMN_CODIGO));
                 inf.descripcion = c.getString(c.getColumnIndex(TipoInformacionModel.COLUMN_DESCRIPCION));
                 ListadoTipoInformacion.add(inf);
             }

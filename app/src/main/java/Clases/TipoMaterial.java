@@ -16,7 +16,8 @@ import Model.TipoMaterialModel;
 public class TipoMaterial
 {
 
-    private int idTipoMaterial;;
+    private int idTipoMaterial;
+    private String codigo;
     private String descripcion;
 
 
@@ -37,6 +38,14 @@ public class TipoMaterial
         this.idTipoMaterial = idTipoMaterial;
     }
 
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -45,9 +54,10 @@ public class TipoMaterial
         this.descripcion = descripcion;
     }
 
-    public boolean insertTipoMaterial(int idTipoMaterial,String descripcion){
+    public boolean insertTipoMaterial(int idTipoMaterial,String codigo,String descripcion){
         contentValues = new ContentValues();
         contentValues.put(TipoMaterialModel.COLUMN_ID,idTipoMaterial);
+        contentValues.put(TipoMaterialModel.COLUMN_CODIGO,codigo);
         contentValues.put(TipoMaterialModel.COLUMN_DESCRIPCION,descripcion);
 
         if(dbManager.Insert(TipoMaterialModel.NAME_TABLE,contentValues))
@@ -74,7 +84,8 @@ public class TipoMaterial
         if (c.moveToFirst())
         {
             this.idTipoMaterial = idTipoMaterial;
-            this.descripcion = c.getString(c.getColumnIndex(TipoInformacionModel.COLUMN_DESCRIPCION));
+            this.codigo =c.getString(c.getColumnIndex(TipoMaterialModel.COLUMN_CODIGO));
+            this.descripcion = c.getString(c.getColumnIndex(TipoMaterialModel.COLUMN_DESCRIPCION));
             return true;
         }
         return false;
@@ -94,6 +105,7 @@ public class TipoMaterial
             {
                 TipoMaterial tipoMaterial = new TipoMaterial(this.dbManager.context);
                 tipoMaterial.idTipoMaterial = c.getInt(c.getColumnIndex(TipoMaterialModel.COLUMN_ID));
+                tipoMaterial.codigo =c.getString(c.getColumnIndex(TipoMaterialModel.COLUMN_CODIGO));
                 tipoMaterial.descripcion = c.getString(c.getColumnIndex(TipoMaterialModel.COLUMN_DESCRIPCION));
                 ListadoTipoMaterial.add(tipoMaterial);
             }

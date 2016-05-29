@@ -53,7 +53,7 @@ public class SincronizarDatos
                     SoapObject so = (SoapObject) response.getProperty(i);
                     if (so != null)
                     {
-                        if(!tipoInformacion.insertTipoInformacion(Integer.parseInt(so.getProperty("idTipoInformacion").toString()),so.getProperty("descripcion").toString()))
+                        if(!tipoInformacion.insertTipoInformacion(Integer.parseInt(so.getProperty("idTipoInformacion").toString()),so.getProperty("codigo").toString(),so.getProperty("descripcion").toString()))
                         {
                             return "Error: al intentar insertar tipo informacion";
                         }
@@ -88,7 +88,7 @@ public class SincronizarDatos
                     SoapObject so = (SoapObject) response.getProperty(i);
                     if (so != null)
                     {
-                        if(!tipoMaterial.insertTipoMaterial(Integer.parseInt(so.getProperty("idTipoMaterial").toString()),so.getProperty("descripcion").toString()))
+                        if(!tipoMaterial.insertTipoMaterial(Integer.parseInt(so.getProperty("idTipoMaterial").toString()),so.getProperty("codigo").toString(),so.getProperty("descripcion").toString()))
                         {
                             return "Error: al intentar insertar tipo material";
                         }

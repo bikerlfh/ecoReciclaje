@@ -15,13 +15,20 @@ public class WebService {
 
     private static String NAMESPACE = "http://tempuri.org/";
     private static String SOAP_ACTION = "http://tempuri.org/";
+    // Servidor Online
     private static String ip = "http://jvmonje-002-site4.htempurl.com";
     private static String port = "80";
     private static String serviceName ="Service1.asmx";
 
+   /* // Servidor local
+    private static String ip = "http://localhost";
+    private static String port = "80";
+    private static String serviceName ="prueba/Service1.asmx";*/
+
     public static SoapObject callWebService(String nombreMetodo,List<PropertyInfo> ListPropertyInfos)
     {
         String URL = ip + ":"+ port +"/"+serviceName;
+        //String URL = ip +"/"+serviceName;
 
         SoapObject request = new SoapObject(NAMESPACE, nombreMetodo);
 

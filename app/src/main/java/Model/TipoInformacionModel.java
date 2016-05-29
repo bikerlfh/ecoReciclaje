@@ -5,11 +5,13 @@ package Model;
  */
 public class TipoInformacionModel
 {
-    public static final String COLUMN_ID = "idTipoInformacion";
     public static final String NAME_TABLE = "tipoinformacion";
+    public static final String COLUMN_ID = "idTipoInformacion";
+    public static final String COLUMN_CODIGO = "codigo";
     public static final String COLUMN_DESCRIPCION = "descripcion";
 
     public static final String CREATE_TABLE_TIPOINFORMACION = "create table " + NAME_TABLE + "(" +
             COLUMN_ID +" integer primary key," +
+            COLUMN_CODIGO + " text not null,"+
             COLUMN_DESCRIPCION + " text not null)";
 }
