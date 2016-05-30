@@ -22,7 +22,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/img_cardview_detalleinformacion"
+                android:id="@+id/img_cv_material"
                 android:src="@drawable/ic_inf"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lbl_cardview_titulo_material"
+                android:id="@+id/lbl_cv_titulo_material"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/img_detallematerial"
                 android:layout_alignParentTop="true"

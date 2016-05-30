@@ -30,8 +30,8 @@ public class RvAdapterMaterial extends RecyclerView.Adapter<RvAdapterMaterial.Ma
         public MaterialViewHolder(View itemView) {
             super(itemView);
             cvMaterial = (CardView)itemView.findViewById(R.id.cvMaterial);
-            titulo = (TextView)itemView.findViewById(R.id.lbl_cardview_titulo_material);
-            imagen = (ImageView)itemView.findViewById(R.id.img_detallematerial);
+            titulo = (TextView)itemView.findViewById(R.id.lbl_cv_titulo_material);
+            imagen = (ImageView)itemView.findViewById(R.id.img_cv_material);
             itemView.setOnClickListener(this);
         }
         @Override

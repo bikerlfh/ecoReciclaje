@@ -18,7 +18,7 @@ public class DetalleMaterialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_material);
 
-        lblNombre = (TextView)findViewById(R.id.lbl_cardview_titulo_material);
+        lblNombre = (TextView)findViewById(R.id.lbl_titulo_detallematerial);
         lblDescripcion = (TextView)findViewById(R.id.lbl_descripcion_detallematerial);
         lblTipoMaterial = (TextView)findViewById(R.id.lbl_tipomaterial_detallematerial);
         lblTipoMaterial.setText("");
