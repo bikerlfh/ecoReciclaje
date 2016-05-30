@@ -82,6 +82,25 @@ public class TipoInformacion {
         }
         return false;
     }
+
+    public boolean consultarTipoInformacionPorCodigo(String codigo)
+    {
+        // Se realiza la consulta a la base de datos.
+        // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
+        Cursor c = dbManager.Select(TipoInformacionModel.NAME_TABLE, new String[] { "*" },TipoInformacionModel.COLUMN_CODIGO + "=?",new String[] {codigo},null,null,null,null);
+        // Si hay Tipo Informacion
+        if (c.moveToFirst())
+        {
+            this.idTipoInformacion = c.getInt(c.getColumnIndex(TipoInformacionModel.COLUMN_ID));;
+            this.codigo = c.getString(c.getColumnIndex(TipoInformacionModel.COLUMN_CODIGO));
+            this.descripcion = c.getString(c.getColumnIndex(TipoInformacionModel.COLUMN_DESCRIPCION));
+            this.imagen = CargarImagen(this.codigo);
+
+            return true;
+        }
+        return false;
+    }
+
     public int consultarMaxId()
     {
         Cursor c = dbManager.RawQuery("SELECT MAX("+TipoInformacionModel.COLUMN_ID+") AS "+TipoInformacionModel.COLUMN_ID+" FROM "+TipoInformacionModel.NAME_TABLE,null);

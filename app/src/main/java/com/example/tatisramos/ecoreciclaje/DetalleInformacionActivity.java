@@ -9,7 +9,7 @@ import Clases.Busqueda;
 import Clases.Informacion;
 
 public class DetalleInformacionActivity extends AppCompatActivity {
-    public static final String EXTRA_PARAMETER_POSICION = "detalleinformacionactivity.itemposicion";
+    public static final String EXTRA_PARAMETER_ID_INFORMACION= "detalleinformacionactivity.idinformacion";
     private Informacion informacion;
     private TextView lblTitulo,lblDescripcion,lblMaterial,lblFecha;
     private ImageView imgInformacion;
@@ -26,9 +26,9 @@ public class DetalleInformacionActivity extends AppCompatActivity {
         imgInformacion = (ImageView)findViewById(R.id.img_detalleinformacion);
 
         // Obtener ña posicion con el identificador establecido en la actividad principal
-        int posicion = getIntent().getIntExtra(EXTRA_PARAMETER_POSICION, 0);
-        this.informacion = Busqueda.ListadoInformacion.get(posicion);
-        if (this.informacion != null)
+        int idInformacion = getIntent().getIntExtra(EXTRA_PARAMETER_ID_INFORMACION, 0);
+        this.informacion = new Informacion(this);
+        if (this.informacion.consultarInformacionPorId(idInformacion))
         {
             lblTitulo.setText(this.informacion.getTitulo());
             lblDescripcion.setText(this.informacion.getDescripcion());

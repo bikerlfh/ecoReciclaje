@@ -92,7 +92,7 @@ public class MenuPrincipal extends AppCompatActivity
                 intent = new Intent(MenuPrincipal.this, TipsActivity.class);
             break;
             case R.id.nav_manualidades:
-                intent = new Intent(MenuPrincipal.this, ManualidadesActivity.class);
+                intent = new Intent(MenuPrincipal.this, ManualidadActivity.class);
             break;
             case R.id.nav_reciclaje:
                 intent = new Intent(MenuPrincipal.this, ReciclajeActivity.class);

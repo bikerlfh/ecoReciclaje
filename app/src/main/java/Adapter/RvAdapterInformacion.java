@@ -42,10 +42,11 @@ public class RvAdapterInformacion extends RecyclerView.Adapter<RvAdapterInformac
         public void onClick(View v) {
             // obtenemos la posicion del item donde se ha dado click
             int position = getPosition();
+            int idInformacion = Busqueda.ListadoInformacion.get(position).getIdInformacion();
             // creamos el intent para abrir la actividad DetalleInformacionActivity
             Intent intent =new Intent(context,DetalleInformacionActivity.class);
             // Pasamos por parametro la posicion
-            intent.putExtra(DetalleInformacionActivity.EXTRA_PARAMETER_POSICION,position);
+            intent.putExtra(DetalleInformacionActivity.EXTRA_PARAMETER_ID_INFORMACION,idInformacion);
             context.startActivities(new Intent[]{intent});
 
         }
@@ -70,10 +71,10 @@ public class RvAdapterInformacion extends RecyclerView.Adapter<RvAdapterInformac
     }
     @Override
     public void onBindViewHolder(InformacionViewHolder informacionViewHolder, int i) {
-            Informacion info = Busqueda.ListadoInformacion.get(i);
-            informacionViewHolder.titulo.setText(info.getTitulo());
-            informacionViewHolder.fecha.setText(info.getFecha());
-            informacionViewHolder.imagen.setImageResource(info.tipoInformacion.imagen);
+        Informacion info = Busqueda.ListadoInformacion.get(i);
+        informacionViewHolder.titulo.setText(info.getTitulo());
+        informacionViewHolder.fecha.setText(info.getFecha());
+        informacionViewHolder.imagen.setImageResource(info.tipoInformacion.imagen);
     }
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {

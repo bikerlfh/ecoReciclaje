@@ -30,10 +30,6 @@
             android:label="@string/title_activity_tips"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ManualidadesActivity"
-            android:label="@string/title_activity_manualidades"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ReciclajeActivity"
             android:label="@string/title_activity_reciclaje"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -43,7 +39,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".InformacionActivity2" />
         <activity android:name=".DetalleInformacionActivity" />
-        <activity android:name=".ManualidadActivity2"></activity>
+        <activity android:name=".ManualidadActivity"></activity>
     </application>
 
 </manifest>
