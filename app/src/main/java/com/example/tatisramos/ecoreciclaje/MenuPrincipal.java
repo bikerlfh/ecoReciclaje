@@ -1,6 +1,7 @@
 package com.example.tatisramos.ecoreciclaje;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,11 +12,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MenuPrincipal extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+                   InformacionFragment.OnFragmentInteractionListener,
+                   ManualidadFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,16 +87,19 @@ public class MenuPrincipal extends AppCompatActivity
 
         // Handle navigation view item clicks here.
         Intent intent = null;
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         switch (item.getItemId())
         {
             case R.id.nav_informacion:
-                intent = new Intent(MenuPrincipal.this, InformacionActivity2.class);
+                InformacionFragment informacionFragment = new InformacionFragment();
+                transaction = transaction.replace(R.id.layout_principal,informacionFragment);
             break;
             case R.id.nav_tips:
-                intent = new Intent(MenuPrincipal.this, TipsActivity.class);
+                //intent = new Intent(MenuPrincipal.this, TipsActivity.class);
             break;
             case R.id.nav_manualidades:
-                intent = new Intent(MenuPrincipal.this, ManualidadActivity.class);
+                ManualidadFragment manualidadFragment = new ManualidadFragment();
+                transaction = transaction.replace(R.id.layout_principal,manualidadFragment);
             break;
             case R.id.nav_reciclaje:
                 intent = new Intent(MenuPrincipal.this, ReciclajeActivity.class);
@@ -101,12 +108,16 @@ public class MenuPrincipal extends AppCompatActivity
                 intent = new Intent(MenuPrincipal.this, LugaresActivity.class);
             break;
         }
-        startActivity(intent);
-        //finish();
+        //startActivity(intent);
+        transaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
+}
