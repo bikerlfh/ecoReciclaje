@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="bikerlfh.ecorecycle.Model.Principal"
+            android:name="com.bikerlfh.ecoreciclaje.Principal"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,20 +22,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="bikerlfh.ecorecycle.Model.MenuPrincipal"
+            android:name="com.bikerlfh.ecoreciclaje.MenuPrincipal"
             android:label="@string/title_activity_menu_principal"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="bikerlfh.ecorecycle.Model.ReciclajeActivity"
+            android:name="com.bikerlfh.ecoreciclaje.ReciclajeActivity"
             android:label="@string/title_activity_reciclaje"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="bikerlfh.ecorecycle.Model.LugaresActivity"
+            android:name="com.bikerlfh.ecoreciclaje.LugaresActivity"
             android:label="@string/title_activity_lugares"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name="bikerlfh.ecorecycle.Model.DetalleInformacionActivity" />
-        <activity android:name="bikerlfh.ecorecycle.Model.DetalleMaterialActivity"></activity>
+        <activity android:name="com.bikerlfh.ecoreciclaje.DetalleInformacionActivity" />
+        <activity android:name="com.bikerlfh.ecoreciclaje.DetalleMaterialActivity"></activity>
     </application>
 
 </manifest>
