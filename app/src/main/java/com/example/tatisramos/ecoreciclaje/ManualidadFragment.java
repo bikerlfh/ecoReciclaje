@@ -35,21 +35,22 @@ public class ManualidadFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_manualidad, container, false);
 
         /******************* RecicleView *******************/
         rvManualidad = (RecyclerView)view.findViewById(R.id.rvManualidad);
         rvManualidad.setHasFixedSize(true);
+
         // Asignamos un layoud Manager
         // Obtenemos la actividad donde se carga el fragment
         Activity activity =  getActivity();
         LinearLayoutManager llm = new LinearLayoutManager(activity);
         rvManualidad.setLayoutManager(llm);
+
         /******************* RecicleView *******************/
         tipoInformacion = new TipoInformacion(activity);
         // Se Consulta el tipo de informacion manualidad

@@ -19,7 +19,9 @@ import android.view.MenuItem;
 public class MenuPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
                    InformacionFragment.OnFragmentInteractionListener,
-                   ManualidadFragment.OnFragmentInteractionListener {
+                   TipsFragment.OnFragmentInteractionListener,
+                   ManualidadFragment.OnFragmentInteractionListener,
+                   MaterialFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,14 +97,16 @@ public class MenuPrincipal extends AppCompatActivity
                 transaction = transaction.replace(R.id.layout_principal,informacionFragment);
             break;
             case R.id.nav_tips:
-                //intent = new Intent(MenuPrincipal.this, TipsActivity.class);
+                TipsFragment tipsFragment = new TipsFragment();
+                transaction = transaction.replace(R.id.layout_principal,tipsFragment);
             break;
             case R.id.nav_manualidades:
                 ManualidadFragment manualidadFragment = new ManualidadFragment();
                 transaction = transaction.replace(R.id.layout_principal,manualidadFragment);
             break;
             case R.id.nav_reciclaje:
-                intent = new Intent(MenuPrincipal.this, ReciclajeActivity.class);
+                MaterialFragment materialFragment = new MaterialFragment();
+                transaction = transaction.replace(R.id.layout_principal,materialFragment);
             break;
             case R.id.nav_lugares:
                 intent = new Intent(MenuPrincipal.this, LugaresActivity.class);

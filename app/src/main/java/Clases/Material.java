@@ -7,6 +7,7 @@ import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.InformacionModel;
 import Model.MaterialModel;
 import Model.TipoInformacionModel;
 
@@ -24,8 +25,12 @@ public class Material {
     private DbManager dbManager;
     private  ContentValues contentValues;
 
+
+    public TipoMaterial tipoMaterial;
+
     public Material(Context context) {
         dbManager= new DbManager(context);
+        this.tipoMaterial = new TipoMaterial(context);
     }
 
     public int getIdMaterial() {
@@ -71,6 +76,7 @@ public class Material {
     public boolean insertMaterial(int idMaterial, int idTipoMaterial, String codigo, String nombre,String descripcion){
         contentValues = new ContentValues();
         contentValues.put(MaterialModel.COLUMN_ID,idMaterial);
+        if (idTipoMaterial > 0)
         contentValues.put(MaterialModel.COLUMN_ID_TIPO_MATERIAL,idTipoMaterial);
         contentValues.put(MaterialModel.COLUMN_CODIGO,codigo);
         contentValues.put(MaterialModel.COLUMN_NOMBRE,nombre);
@@ -94,6 +100,9 @@ public class Material {
             this.codigo = c.getString(c.getColumnIndex(MaterialModel.COLUMN_CODIGO));
             this.nombre = c.getString(c.getColumnIndex(MaterialModel.COLUMN_NOMBRE));
             this.descripcion = c.getString(c.getColumnIndex(MaterialModel.COLUMN_DESCRIPCION));
+            // Cargamos los objetos embebidos
+            this.tipoMaterial.consultarTipoMaterialPorId(this.idTipoMaterial);
+            c.close();
             return true;
         }
         return false;
@@ -115,21 +124,14 @@ public class Material {
         List<Material> ListadoMaterial = new ArrayList<Material>();
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.Select(MaterialModel.NAME_TABLE, new String[] { "*" },null,null,null,null,null,null);
+        Cursor c = dbManager.Select(MaterialModel.NAME_TABLE, new String[] { "*" },null,null,null,null,MaterialModel.COLUMN_ID,null);
         // Si hay Tipo Informacion
         if (c.moveToFirst())
         {
             // Recorremos el cursor y llenamos el Objeto mat el cual se agrega a la ListadoMaterial
             do
             {
-                Material mat = new Material(this.dbManager.context);
-                mat.idMaterial = idMaterial;
-                mat.idTipoMaterial = c.getInt(c.getColumnIndex(MaterialModel.COLUMN_ID_TIPO_MATERIAL));
-                mat.codigo = c.getString(c.getColumnIndex(MaterialModel.COLUMN_CODIGO));
-                mat.nombre = c.getString(c.getColumnIndex(MaterialModel.COLUMN_NOMBRE));
-                mat.descripcion = c.getString(c.getColumnIndex(MaterialModel.COLUMN_DESCRIPCION));
-
-                ListadoMaterial.add(mat);
+                ListadoMaterial.add(this.CrearObjetoMaterial(c));
             }
             while (c.moveToNext());
         }
@@ -147,16 +149,23 @@ public class Material {
             // Recorremos el cursor y llenamos el Objeto mat el cual se agrega a la ListadoMaterial
             do
             {
-                Material mat = new Material(this.dbManager.context);
-                mat.idMaterial = idMaterial;
-                mat.idTipoMaterial = c.getInt(c.getColumnIndex(MaterialModel.COLUMN_ID_TIPO_MATERIAL));
-                mat.codigo = c.getString(c.getColumnIndex(MaterialModel.COLUMN_CODIGO));
-                mat.nombre = c.getString(c.getColumnIndex(MaterialModel.COLUMN_NOMBRE));
-                mat.descripcion = c.getString(c.getColumnIndex(MaterialModel.COLUMN_DESCRIPCION));
-                ListadoMaterial.add(mat);
+                ListadoMaterial.add(this.CrearObjetoMaterial(c));
             }
             while (c.moveToNext());
         }
         return ListadoMaterial;
+    }
+    private Material CrearObjetoMaterial(Cursor cursor)
+    {
+        Material mat = new Material(this.dbManager.context);
+        mat.idMaterial = idMaterial;
+        mat.idTipoMaterial = cursor.getInt(cursor.getColumnIndex(MaterialModel.COLUMN_ID_TIPO_MATERIAL));
+        mat.codigo = cursor.getString(cursor.getColumnIndex(MaterialModel.COLUMN_CODIGO));
+        mat.nombre = cursor.getString(cursor.getColumnIndex(MaterialModel.COLUMN_NOMBRE));
+        mat.descripcion = cursor.getString(cursor.getColumnIndex(MaterialModel.COLUMN_DESCRIPCION));
+
+        // Cargamos los objetos embebidos
+        mat.tipoMaterial.consultarTipoMaterialPorId(mat.idTipoMaterial);
+        return mat;
     }
 }
