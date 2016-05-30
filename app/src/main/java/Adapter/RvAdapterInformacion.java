@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,6 @@ import android.widget.TextView;
 
 import com.example.tatisramos.ecoreciclaje.DetalleInformacionActivity;
 import com.example.tatisramos.ecoreciclaje.R;
-
-import java.util.List;
 
 import Clases.Busqueda;
 import Clases.Informacion;
@@ -32,9 +29,9 @@ public class RvAdapterInformacion extends RecyclerView.Adapter<RvAdapterInformac
         public InformacionViewHolder(View itemView) {
             super(itemView);
             cvInformacion = (CardView)itemView.findViewById(R.id.cvInformacion);
-            titulo = (TextView)itemView.findViewById(R.id.lbl_titulo_detalleinformacion);
-            fecha = (TextView)itemView.findViewById(R.id.lbl_fecha_informacion);
-            imagen = (ImageView)itemView.findViewById(R.id.img_detalleinformacion);
+            titulo = (TextView)itemView.findViewById(R.id.lbl_fecha_cardview_informacion);
+            fecha = (TextView)itemView.findViewById(R.id.lbl_fecha_cardview_informacion);
+            imagen = (ImageView)itemView.findViewById(R.id.img_cardview_informacion);
             itemView.setOnClickListener(this);
         }
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import Clases.Busqueda;
 import Clases.Informacion;
 
 public class DetalleInformacionActivity extends AppCompatActivity {
@@ -23,7 +22,7 @@ public class DetalleInformacionActivity extends AppCompatActivity {
         lblMaterial = (TextView)findViewById(R.id.lbl_material_detalleinformacion);
         lblMaterial.setText("");
         lblFecha = (TextView)findViewById(R.id.lbl_fecha_detalleinformacion);
-        imgInformacion = (ImageView)findViewById(R.id.img_detalleinformacion);
+        imgInformacion = (ImageView)findViewById(R.id.img_cardview_informacion);
 
         // Obtener ña posicion con el identificador establecido en la actividad principal
         int idInformacion = getIntent().getIntExtra(EXTRA_PARAMETER_ID_INFORMACION, 0);

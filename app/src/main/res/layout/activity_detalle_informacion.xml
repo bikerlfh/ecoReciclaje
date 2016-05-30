@@ -12,7 +12,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/img_detalleinformacion"
+        android:id="@+id/img_cardview_informacion"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="16dp"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/lbl_titulo_detalleinformacion"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/img_detalleinformacion"
+        android:layout_toRightOf="@+id/img_cardview_informacion"
         android:layout_alignParentTop="true"
         android:textSize="20sp"
         android:text="@string/title_titulo"
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/lbl_fecha_detalleinformacion"
-        android:layout_toRightOf="@+id/img_detalleinformacion"
+        android:layout_toRightOf="@+id/img_cardview_informacion"
         android:layout_below="@+id/lbl_titulo_detalleinformacion"
         android:text="@string/title_fecha" />
 
@@ -57,7 +57,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/lbl_material_detalleinformacion"
-        android:layout_below="@+id/img_detalleinformacion"
+        android:layout_below="@+id/img_cardview_informacion"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="36dp" />
