@@ -29,9 +29,9 @@ public class RvAdapterManualidad extends RecyclerView.Adapter<RvAdapterManualida
         public ManualidadViewHolder(View itemView) {
             super(itemView);
             cvManualidad = (CardView)itemView.findViewById(R.id.cvManualidad);
-            titulo = (TextView)itemView.findViewById(R.id.lbl_titulo_cardview_manualidad);
-            fecha = (TextView)itemView.findViewById(R.id.lbl_fecha_cardview_manualidad);
-            imagen = (ImageView)itemView.findViewById(R.id.img_cardview_manualidad);
+            titulo = (TextView)itemView.findViewById(R.id.lbl_cv_titulo_manualidad);
+            fecha = (TextView)itemView.findViewById(R.id.lbl_cv_fecha_manualidad);
+            imagen = (ImageView)itemView.findViewById(R.id.img_cv_manualidad);
             itemView.setOnClickListener(this);
         }
 
