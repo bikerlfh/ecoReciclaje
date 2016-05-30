@@ -26,10 +26,6 @@
             android:label="@string/title_activity_menu_principal"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".InformacionActivity"
-            android:label="@string/title_activity_informacion"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".TipsActivity"
             android:label="@string/title_activity_tips"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -46,7 +42,8 @@
             android:label="@string/title_activity_lugares"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".InformacionActivity2" />
-        <activity android:name=".DetalleInformacionActivity"></activity>
+        <activity android:name=".DetalleInformacionActivity" />
+        <activity android:name=".ManualidadActivity2"></activity>
     </application>
 
 </manifest>
