@@ -107,7 +107,7 @@ public class SincronizarDatos
         int ultimoId = municipio.consultarMaxId();
         ListadoPropertyInfo = new ArrayList<>();
         PropertyInfo prop = new PropertyInfo();
-        prop.setName("ultimoIdDepartamentoMunicipio");
+        prop.setName("ultimoIdMunicipio");
         prop.setValue(ultimoId);
         prop.setType(int.class);
         ListadoPropertyInfo.add(prop);
