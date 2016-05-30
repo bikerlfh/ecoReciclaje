@@ -111,7 +111,7 @@ public class SitioReciclajeMaterial {
         List<SitioReciclajeMaterial> ListadoSitioReciclajeMaterial = new ArrayList<>();
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.Select(MaterialModel.NAME_TABLE, new String[] { "*" },SitioReciclajeMaterialModel.COLUMN_ID_SITIO_RECICLAJE + "=?",new String[] {String.valueOf(idSitioReciclaje)},null,null,null,null);
+        Cursor c = dbManager.Select(SitioReciclajeMaterialModel.NAME_TABLE, new String[] { "*" },SitioReciclajeMaterialModel.COLUMN_ID_SITIO_RECICLAJE + "=?",new String[] {String.valueOf(idSitioReciclaje)},null,null,null,null);
         if (c.moveToFirst())
         {
             do

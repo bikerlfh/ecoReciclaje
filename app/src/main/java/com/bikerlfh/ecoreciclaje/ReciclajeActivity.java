@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import bikerlfh.ecorecycle.R;
+import com.bikerlfh.ecoreciclaje.R;
 
 public class ReciclajeActivity extends AppCompatActivity {
 

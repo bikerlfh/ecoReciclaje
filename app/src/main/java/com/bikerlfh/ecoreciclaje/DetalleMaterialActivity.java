@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import bikerlfh.ecorecycle.R;
-
 import com.bikerlfh.ecoreciclaje.Clases.Material;
 
 public class DetalleMaterialActivity extends AppCompatActivity {

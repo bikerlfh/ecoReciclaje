@@ -10,9 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bikerlfh.ecoreciclaje.DetalleInformacionActivity;
 import com.bikerlfh.ecoreciclaje.DetalleMaterialActivity;
-import bikerlfh.ecorecycle.R;
+import com.bikerlfh.ecoreciclaje.R;
 
 import com.bikerlfh.ecoreciclaje.Clases.Busqueda;
 import com.bikerlfh.ecoreciclaje.Clases.Material;

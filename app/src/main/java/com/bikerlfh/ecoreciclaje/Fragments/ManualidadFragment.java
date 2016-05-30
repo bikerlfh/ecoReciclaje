@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import bikerlfh.ecorecycle.R;
+import com.bikerlfh.ecoreciclaje.R;
 
 import com.bikerlfh.ecoreciclaje.Adapter.RvAdapterManualidad;
 import com.bikerlfh.ecoreciclaje.Clases.Busqueda;

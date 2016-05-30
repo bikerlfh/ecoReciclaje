@@ -16,7 +16,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import bikerlfh.ecorecycle.R;
+import com.bikerlfh.ecoreciclaje.R;
 
 import com.bikerlfh.ecoreciclaje.Fragments.InformacionFragment;
 import com.bikerlfh.ecoreciclaje.Fragments.ManualidadFragment;
@@ -116,7 +116,10 @@ public class MenuPrincipal extends AppCompatActivity
                 transaction = transaction.replace(R.id.layout_principal,materialFragment);
             break;
             case R.id.nav_lugares:
-                intent = new Intent(MenuPrincipal.this, LugaresActivity.class);
+                //MapsActivity mapsActivity = new MapsActivity();
+                intent = new Intent(MenuPrincipal.this, MapsActivity.class);
+                startActivity(intent);
+
             break;
         }
         //startActivity(intent);

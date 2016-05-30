@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import bikerlfh.ecorecycle.R;
+import com.bikerlfh.ecoreciclaje.R;
 
 import com.bikerlfh.ecoreciclaje.Adapter.RvAdapterInformacion;
 import com.bikerlfh.ecoreciclaje.Clases.Busqueda;

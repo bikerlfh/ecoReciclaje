@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bikerlfh.ecoreciclaje.DetalleInformacionActivity;
-import bikerlfh.ecorecycle.R;
+import com.bikerlfh.ecoreciclaje.R;
 
 import com.bikerlfh.ecoreciclaje.Clases.Busqueda;
 import com.bikerlfh.ecoreciclaje.Clases.Informacion;

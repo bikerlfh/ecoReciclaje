@@ -25,8 +25,12 @@ public class SitioReciclaje {
     private DbManager dbManager;
     private ContentValues contentValues;
 
+    // Objetos Embebidos
+    public List<SitioReciclajeMaterial> ListadoSitioReciclajeMaterial;
+
     public SitioReciclaje(Context context) {
         dbManager= new DbManager(context);
+        ListadoSitioReciclajeMaterial = new ArrayList<>();
     }
 
     public int getIdSitioReciclaje() {
@@ -115,6 +119,7 @@ public class SitioReciclaje {
             this.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
             this.latitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
             this.longitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
+            this.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(this.idSitioReciclaje);
             return true;
         }
         return false;
@@ -151,6 +156,7 @@ public class SitioReciclaje {
                 sitio.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
                 sitio.latitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
                 sitio.longitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
+                sitio.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(sitio.idSitioReciclaje);
                 ListadoSitioReciclaje.add(sitio);
             }
             while (c.moveToNext());
@@ -178,10 +184,18 @@ public class SitioReciclaje {
                 sitio.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
                 sitio.latitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
                 sitio.longitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
+                sitio.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(sitio.idSitioReciclaje);
                 ListadoSitioReciclaje.add(sitio);
             }
             while (c.moveToNext());
         }
         return ListadoSitioReciclaje;
     }
+
+    private List<SitioReciclajeMaterial> ConsultarSitioReciclajeMaterial(int idSitioReciclaje)
+    {
+        SitioReciclajeMaterial sitioReciclajeMaterial = new SitioReciclajeMaterial(this.dbManager.context);
+        return sitioReciclajeMaterial.consultarSitioReciclajeMaterialPorIdSitioReciclaje(idSitioReciclaje);
+    }
+
 }

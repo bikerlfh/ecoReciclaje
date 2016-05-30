@@ -13,21 +13,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import bikerlfh.ecorecycle.R;
+import com.bikerlfh.ecoreciclaje.R;
 
+import com.bikerlfh.ecoreciclaje.Clases.Busqueda;
 import com.bikerlfh.ecoreciclaje.Clases.SincronizarDatos;
+import com.bikerlfh.ecoreciclaje.Clases.SitioReciclaje;
 
 public class Principal extends AppCompatActivity {
 
     //private final int DURACION_SPLASH = 2000;
-
+    private SitioReciclaje sitioReciclaje;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //this.deleteDatabase("ecoreciclaje.sqlite");
+        this.deleteDatabase("ecoreciclaje.sqlite");
 
         /*new Handler().postDelayed(new Runnable() {
             @Override
@@ -39,7 +41,7 @@ public class Principal extends AppCompatActivity {
 
             ;
         }, DURACION_SPLASH);*/
-
+        sitioReciclaje = new SitioReciclaje(this);
         // Validamos el estado de internet
         if (isOnline())
             new AsyncSincronizar().execute("", "", "");
@@ -89,51 +91,62 @@ public class Principal extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
+            // sincroniza pais
             resultadoSincronizacion = sincronizarDatos.SincronizarPais();
             if (resultadoSincronizacion.contains("Error"))
             {
                 resultado = resultadoSincronizacion + ". ";
             }
+            // sincroniza departamento
             resultadoSincronizacion = sincronizarDatos.SincronizarDepartamento();
             if (resultadoSincronizacion.contains("Error"))
             {
                 resultado = resultadoSincronizacion + ". ";
             }
+            // sincroniza municipio
             resultadoSincronizacion = sincronizarDatos.SincronizarMunicipio();
             if (resultadoSincronizacion.contains("Error"))
             {
                 resultado = resultadoSincronizacion + ". ";
             }
+            // sincroniza tipo informacion
             resultadoSincronizacion = sincronizarDatos.SincronizarTipoInformacion();
             if (resultadoSincronizacion.contains("Error"))
             {
                 resultado = resultadoSincronizacion + ". ";
             }
+            // sincroniza tipo material
             resultadoSincronizacion = sincronizarDatos.SincronizarTipoMaterial();
             if (resultadoSincronizacion.contains("Error"))
             {
                 resultado += resultadoSincronizacion+ ". ";
             }
+            // sincroniza informacion
             resultadoSincronizacion = sincronizarDatos.SincronizarInformacion();
             if (resultadoSincronizacion.contains("Error"))
             {
                 resultado += resultadoSincronizacion+ ". ";
             }
+            // sincroniza material
             resultadoSincronizacion = sincronizarDatos.SincronizarMaterial();
             if (resultadoSincronizacion.contains("Error"))
             {
                 resultado += resultadoSincronizacion+ ". ";
             }
+            // sincroniza sitio reciclaje
             resultadoSincronizacion = sincronizarDatos.SincronizarSitioReciclaje();
             if (resultadoSincronizacion.contains("Error"))
             {
                 resultado += resultadoSincronizacion+ ". ";
             }
+            // sincroniza sitio reciclaje material
             resultadoSincronizacion = sincronizarDatos.SincronizarSitioReciclajeMaterial();
             if (resultadoSincronizacion.contains("Error"))
             {
                 resultado += resultadoSincronizacion+ ". ";
             }
+            // Cargamos en el listado los sitios de reciclaje
+            Busqueda.ListadoSitioReciclaje = sitioReciclaje.consultarTodoSitioReciclaje();
             return null;
         }
 

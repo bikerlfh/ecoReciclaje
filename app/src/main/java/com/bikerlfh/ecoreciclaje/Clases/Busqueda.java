@@ -11,5 +11,6 @@ public class Busqueda
     public static List<Informacion> ListadoInformacionTips;
     public static List<Informacion> ListadoInformacionManualidad;
     public static List<Material> ListadoMaterial;
+    public static List<SitioReciclaje> ListadoSitioReciclaje;
 
 }
