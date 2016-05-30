@@ -30,9 +30,9 @@ public class RvAdapterTips extends RecyclerView.Adapter<RvAdapterTips.TipsViewHo
         public TipsViewHolder(View itemView) {
             super(itemView);
             cvTips = (CardView)itemView.findViewById(R.id.cvTips);
-            titulo = (TextView)itemView.findViewById(R.id.lbl_cardview_titulo_tips);
-            fecha = (TextView)itemView.findViewById(R.id.lbl_cardview_fecha_tips);
-            imagen = (ImageView)itemView.findViewById(R.id.img_cardview_tips);
+            titulo = (TextView)itemView.findViewById(R.id.lbl_cv_titulo_tips);
+            fecha = (TextView)itemView.findViewById(R.id.lbl_cv_fecha_tips);
+            imagen = (ImageView)itemView.findViewById(R.id.img_cv_tips);
             itemView.setOnClickListener(this);
         }
 

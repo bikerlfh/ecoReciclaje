@@ -22,7 +22,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/img_cardview_tips"
+                android:id="@+id/img_cv_tips"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="16dp"
@@ -32,9 +32,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lbl_cardview_titulo_tips"
+                android:id="@+id/lbl_cv_titulo_tips"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/img_cardview_tips"
+                android:layout_toRightOf="@+id/img_cv_tips"
                 android:layout_alignParentTop="true"
                 android:textSize="20sp"
                 android:text="@string/title_titulo" />
@@ -42,9 +42,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/lbl_cardview_fecha_tips"
-                android:layout_toRightOf="@+id/img_cardview_tips"
-                android:layout_below="@+id/lbl_cardview_titulo_tips"
+                android:id="@+id/lbl_cv_fecha_tips"
+                android:layout_toRightOf="@+id/img_cv_tips"
+                android:layout_below="@+id/lbl_cv_titulo_tips"
                 android:text="@string/title_fecha" />
 
         </RelativeLayout>
