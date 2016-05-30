@@ -29,9 +29,9 @@ public class RvAdapterInformacion extends RecyclerView.Adapter<RvAdapterInformac
         public InformacionViewHolder(View itemView) {
             super(itemView);
             cvInformacion = (CardView)itemView.findViewById(R.id.cvInformacion);
-            titulo = (TextView)itemView.findViewById(R.id.lbl_fecha_cardview_informacion);
-            fecha = (TextView)itemView.findViewById(R.id.lbl_fecha_cardview_informacion);
-            imagen = (ImageView)itemView.findViewById(R.id.img_cardview_informacion);
+            titulo = (TextView)itemView.findViewById(R.id.lbl_cv_titulo_informacion);
+            fecha = (TextView)itemView.findViewById(R.id.lbl_cv_fecha_informacion);
+            imagen = (ImageView)itemView.findViewById(R.id.img_cv_informacion);
             itemView.setOnClickListener(this);
         }
 
