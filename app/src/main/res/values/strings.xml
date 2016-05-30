@@ -23,4 +23,6 @@
     <string name="title_nombrematerial">Nombre</string>
     <string name="title_descripcion">Descripcion</string>
     <string name="title_tipomaterial">Tipo Material</string>
+    <string name="title_descripcionmaterial">Descripcion</string>
+
 </resources>

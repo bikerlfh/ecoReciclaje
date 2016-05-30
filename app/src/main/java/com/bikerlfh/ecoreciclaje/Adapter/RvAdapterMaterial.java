@@ -41,14 +41,13 @@ public class RvAdapterMaterial extends RecyclerView.Adapter<RvAdapterMaterial.Ma
             // obtenemos el id del material
             int idMaterial = Busqueda.ListadoMaterial.get(position).getIdMaterial();
             // creamos el intent para abrir la actividad DetalleInformacionActivity
-            Intent intent =new Intent(context,DetalleInformacionActivity.class);
+            Intent intent =new Intent(context,DetalleMaterialActivity.class);
             // Pasamos por parametro la posicion
             intent.putExtra(DetalleMaterialActivity.EXTRA_PARAMETER_ID_MATERIAL,idMaterial);
             context.startActivities(new Intent[]{intent});
         }
     }
     private Context context;
-
     public RvAdapterMaterial(Context context)
     {
         this.context = context;
@@ -67,9 +66,9 @@ public class RvAdapterMaterial extends RecyclerView.Adapter<RvAdapterMaterial.Ma
 
     @Override
     public void onBindViewHolder(MaterialViewHolder materialViewHolder, int i) {
-        Material material = Busqueda.ListadoMaterial.get(i);
-        materialViewHolder.titulo.setText(material.getNombre());
-        materialViewHolder.imagen.setImageResource(material.tipoMaterial.imagen);
+        Material mat = Busqueda.ListadoMaterial.get(i);
+        materialViewHolder.titulo.setText(mat.getNombre());
+        materialViewHolder.imagen.setImageResource(mat.tipoMaterial.imagen);
     }
 
     @Override

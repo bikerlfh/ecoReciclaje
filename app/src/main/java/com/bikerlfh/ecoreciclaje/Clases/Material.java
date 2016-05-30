@@ -133,6 +133,7 @@ public class Material {
             }
             while (c.moveToNext());
         }
+        c.close();
         return ListadoMaterial;
     }
 
@@ -156,7 +157,7 @@ public class Material {
     private Material CrearObjetoMaterial(Cursor cursor)
     {
         Material mat = new Material(this.dbManager.context);
-        mat.idMaterial = idMaterial;
+        mat.idMaterial = cursor.getInt(cursor.getColumnIndex(MaterialModel.COLUMN_ID));
         mat.idTipoMaterial = cursor.getInt(cursor.getColumnIndex(MaterialModel.COLUMN_ID_TIPO_MATERIAL));
         mat.codigo = cursor.getString(cursor.getColumnIndex(MaterialModel.COLUMN_CODIGO));
         mat.nombre = cursor.getString(cursor.getColumnIndex(MaterialModel.COLUMN_NOMBRE));
