@@ -13,65 +13,66 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import Adapter.RvAdapterManualidad;
+import Adapter.RvAdapterTips;
 import Clases.Busqueda;
 import Clases.Informacion;
 import Clases.TipoInformacion;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ManualidadFragment.OnFragmentInteractionListener} interface
+ * {@link TipsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class ManualidadFragment extends Fragment {
+public class TipsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
-    RecyclerView rvManualidad;
+
+    RecyclerView rvTips;
     TipoInformacion tipoInformacion;
 
-    public ManualidadFragment() {
+    public TipsFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_manualidad, container, false);
+        View view = inflater.inflate(R.layout.fragment_tips, container, false);
 
         /******************* RecicleView *******************/
-        rvManualidad = (RecyclerView)view.findViewById(R.id.rvManualidad);
-        rvManualidad.setHasFixedSize(true);
+        rvTips = (RecyclerView) view.findViewById(R.id.rvTips);
+        rvTips.setHasFixedSize(true);
 
         // Asignamos un layoud Manager
         // Obtenemos la actividad donde se carga el fragment
         Activity activity =  getActivity();
         LinearLayoutManager llm = new LinearLayoutManager(activity);
-        rvManualidad.setLayoutManager(llm);
+        rvTips.setLayoutManager(llm);
 
         /******************* RecicleView *******************/
         tipoInformacion = new TipoInformacion(activity);
         // Se Consulta el tipo de informacion manualidad
-        if (tipoInformacion.consultarTipoInformacionPorCodigo("03"))
+        if (tipoInformacion.consultarTipoInformacionPorCodigo("02"))
         {
             Informacion informacion = new Informacion(activity);
-            Busqueda.ListadoInformacionManualidad = informacion.consultarInformacionPorIdTipoInformacion(tipoInformacion.getIdTipoInformacion());
-            if (Busqueda.ListadoInformacionManualidad.size() == 0)
+            Busqueda.ListadoInformacionTips = informacion.consultarInformacionPorIdTipoInformacion(tipoInformacion.getIdTipoInformacion());
+            if (Busqueda.ListadoInformacionTips.size() == 0)
             {
-                Toast.makeText(activity,"No se encontró ninguna manualidad registrada",Toast.LENGTH_LONG);
+                Toast.makeText(activity,"No se encontró ninguna tips registrada",Toast.LENGTH_LONG);
             }
-            RvAdapterManualidad adapter = new RvAdapterManualidad(activity);
-            rvManualidad.setAdapter(adapter);
-            rvManualidad.setItemAnimator(new DefaultItemAnimator());
+            RvAdapterTips adapter = new RvAdapterTips(activity);
+            rvTips.setAdapter(adapter);
+            rvTips.setItemAnimator(new DefaultItemAnimator());
         }
         else
         {
-            Toast.makeText(activity,"No se encontro el tipo de información (03 - MANUALIDAD)",Toast.LENGTH_LONG);
+            Toast.makeText(activity,"No se encontro el tipo de información (02 - TIPS)",Toast.LENGTH_LONG);
         }
         return view;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
