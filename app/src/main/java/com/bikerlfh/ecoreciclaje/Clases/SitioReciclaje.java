@@ -124,6 +124,29 @@ public class SitioReciclaje {
         }
         return false;
     }
+
+    public boolean consultarSitioReciclajePorLatitudLongitud(String latitud,String longitud)
+    {
+        // Se realiza la consulta a la base de datos.
+        // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
+        Cursor c = dbManager.RawQuery("SELECT * FROM "+ SitioReciclajeModel.NAME_TABLE + " WHERE "+SitioReciclajeModel.COLUMN_LATITUD + "='"+latitud+"' and "+SitioReciclajeModel.COLUMN_LONGITUD + "='"+longitud+"'",null);
+        //Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[] { "*" },SitioReciclajeModel.COLUMN_LATITUD + "=? and "+SitioReciclajeModel.COLUMN_LONGITUD + "=?",new String[] {latitud,longitud},null,null,null,null);
+        // Si hay Tipo Informacion
+        if (c.moveToFirst())
+        {
+            this.idSitioReciclaje = idSitioReciclaje;
+            this.nombre = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_NOMBRE));
+            this.direccion = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_DIRECCION));
+            this.propietario = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_PROPIETARIO));
+            this.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
+            this.latitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
+            this.longitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
+            this.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(this.idSitioReciclaje);
+            return true;
+        }
+        return false;
+    }
+
     public int consultarMaxId()
     {
         Cursor c = dbManager.RawQuery("SELECT MAX("+ SitioReciclajeModel.COLUMN_ID+") AS "+SitioReciclajeModel.COLUMN_ID+" FROM "+SitioReciclajeModel.NAME_TABLE,null);
