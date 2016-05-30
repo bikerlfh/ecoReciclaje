@@ -19,6 +19,7 @@ public class Material {
     private int idTipoMaterial;
     private String codigo;
     private String nombre;
+    private String descripcion;
 
     private DbManager dbManager;
     private  ContentValues contentValues;
@@ -59,12 +60,21 @@ public class Material {
         this.nombre = nombre;
     }
 
-    public boolean insertMaterial(int idMaterial,int idTipoMaterial,String codigo, String nombre){
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public boolean insertMaterial(int idMaterial, int idTipoMaterial, String codigo, String nombre,String descripcion){
         contentValues = new ContentValues();
         contentValues.put(MaterialModel.COLUMN_ID,idMaterial);
         contentValues.put(MaterialModel.COLUMN_ID_TIPO_MATERIAL,idTipoMaterial);
         contentValues.put(MaterialModel.COLUMN_CODIGO,codigo);
         contentValues.put(MaterialModel.COLUMN_NOMBRE,nombre);
+        contentValues.put(MaterialModel.COLUMN_DESCRIPCION,descripcion);
 
         if(dbManager.Insert(MaterialModel.NAME_TABLE,contentValues))
             return true;
@@ -83,6 +93,7 @@ public class Material {
             this.idTipoMaterial = c.getInt(c.getColumnIndex(MaterialModel.COLUMN_ID_TIPO_MATERIAL));
             this.codigo = c.getString(c.getColumnIndex(MaterialModel.COLUMN_CODIGO));
             this.nombre = c.getString(c.getColumnIndex(MaterialModel.COLUMN_NOMBRE));
+            this.descripcion = c.getString(c.getColumnIndex(MaterialModel.COLUMN_DESCRIPCION));
             return true;
         }
         return false;
@@ -116,6 +127,8 @@ public class Material {
                 mat.idTipoMaterial = c.getInt(c.getColumnIndex(MaterialModel.COLUMN_ID_TIPO_MATERIAL));
                 mat.codigo = c.getString(c.getColumnIndex(MaterialModel.COLUMN_CODIGO));
                 mat.nombre = c.getString(c.getColumnIndex(MaterialModel.COLUMN_NOMBRE));
+                mat.descripcion = c.getString(c.getColumnIndex(MaterialModel.COLUMN_DESCRIPCION));
+
                 ListadoMaterial.add(mat);
             }
             while (c.moveToNext());
@@ -139,6 +152,7 @@ public class Material {
                 mat.idTipoMaterial = c.getInt(c.getColumnIndex(MaterialModel.COLUMN_ID_TIPO_MATERIAL));
                 mat.codigo = c.getString(c.getColumnIndex(MaterialModel.COLUMN_CODIGO));
                 mat.nombre = c.getString(c.getColumnIndex(MaterialModel.COLUMN_NOMBRE));
+                mat.descripcion = c.getString(c.getColumnIndex(MaterialModel.COLUMN_DESCRIPCION));
                 ListadoMaterial.add(mat);
             }
             while (c.moveToNext());

@@ -164,7 +164,8 @@ public class SincronizarDatos
                         if(!material.insertMaterial(Integer.parseInt(so.getProperty("idMaterial").toString()),
                                 Integer.parseInt(so.getProperty("idTipoMaterial").toString()),
                                 so.getProperty("codigo").toString(),
-                                so.getProperty("nombre").toString()))
+                                so.getProperty("nombre").toString(),
+                                so.getProperty("descripcion").toString()))
                         {
                             return "Error: al intentar insertar materiales";
                         }
