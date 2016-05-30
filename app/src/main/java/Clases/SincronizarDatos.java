@@ -24,10 +24,115 @@ public class SincronizarDatos
     private Material material;
     private SitioReciclaje sitioReciclaje;
     private SitioReciclajeMaterial sitioReciclajeMaterial;
+    private Pais pais;
+    private Departamento departamento;
+    private Municipio municipio;
 
     public SincronizarDatos(Context context)
     {
         this.context = context;
+    }
+
+    public String SincronizarPais()
+    {
+        pais = new Pais(this.context);
+        int ultimoId = pais.consultarMaxId();
+        ListadoPropertyInfo = new ArrayList<>();
+        PropertyInfo prop = new PropertyInfo();
+        prop.setName("ultimoIdPais");
+        prop.setValue(ultimoId);
+        prop.setType(int.class);
+        ListadoPropertyInfo.add(prop);
+
+        response = webService.callWebService("sincronizarPais",ListadoPropertyInfo);
+        if (response!= null && response.getPropertyCount() > 0)
+        {
+            response = (SoapObject) ((SoapObject) response.getProperty(0)).getProperty("consulta");
+            if (response!=null)
+            {
+                for (int i = 0; i < response.getPropertyCount(); i++)
+                {
+                    SoapObject so = (SoapObject) response.getProperty(i);
+                    if (so != null)
+                    {
+                        if(!pais.insertPais(Integer.parseInt(so.getProperty("idPais").toString()),so.getProperty("codigo").toString(),so.getProperty("descripcion").toString()))
+                        {
+                            return "Error: al intentar insertar pais";
+                        }
+                    }
+                }
+                return "true";
+            }
+        }
+        return "Error: No se encontraron datos en pais";
+    }
+
+    public String SincronizarDepartamento()
+    {
+    departamento = new Departamento(this.context);
+    int ultimoId = departamento.consultarMaxId();
+    ListadoPropertyInfo = new ArrayList<>();
+    PropertyInfo prop = new PropertyInfo();
+    prop.setName("ultimoIdDepartamento");
+    prop.setValue(ultimoId);
+    prop.setType(int.class);
+    ListadoPropertyInfo.add(prop);
+
+    response = webService.callWebService("sincronizarDepartamento",ListadoPropertyInfo);
+    if (response!= null && response.getPropertyCount() > 0)
+    {
+        response = (SoapObject) ((SoapObject) response.getProperty(0)).getProperty("consulta");
+        if (response!=null)
+        {
+            for (int i = 0; i < response.getPropertyCount(); i++)
+            {
+                SoapObject so = (SoapObject) response.getProperty(i);
+                if (so != null)
+                {
+                    if(!departamento.insertDepartamento(Integer.parseInt(so.getProperty("idDepartamento").toString()),Integer.parseInt(so.getProperty("idPais").toString()),so.getProperty("codigo").toString(),so.getProperty("descripcion").toString()))
+                    {
+                        return "Error: al intentar insertar departamento";
+                    }
+                }
+            }
+            return "true";
+        }
+    }
+    return "Error: No se encontraron datos en departamento";
+}
+
+    public String SincronizarMunicipio()
+    {
+        municipio = new Municipio(this.context);
+        int ultimoId = municipio.consultarMaxId();
+        ListadoPropertyInfo = new ArrayList<>();
+        PropertyInfo prop = new PropertyInfo();
+        prop.setName("ultimoIdDepartamentoMunicipio");
+        prop.setValue(ultimoId);
+        prop.setType(int.class);
+        ListadoPropertyInfo.add(prop);
+
+        response = webService.callWebService("sincronizarMunicipio",ListadoPropertyInfo);
+        if (response!= null && response.getPropertyCount() > 0)
+        {
+            response = (SoapObject) ((SoapObject) response.getProperty(0)).getProperty("consulta");
+            if (response!=null)
+            {
+                for (int i = 0; i < response.getPropertyCount(); i++)
+                {
+                    SoapObject so = (SoapObject) response.getProperty(i);
+                    if (so != null)
+                    {
+                        if(!municipio.insertMunicipio(Integer.parseInt(so.getProperty("idMunicipio").toString()),Integer.parseInt(so.getProperty("idDepartamento").toString()),so.getProperty("codigo").toString(),so.getProperty("descripcion").toString()))
+                        {
+                            return "Error: al intentar insertar Municipio";
+                        }
+                    }
+                }
+                return "true";
+            }
+        }
+        return "Error: No se encontraron datos en Municipio";
     }
 
     public String SincronizarTipoInformacion()
@@ -203,6 +308,7 @@ public class SincronizarDatos
                                 so.getProperty("nombre").toString(),
                                 so.getProperty("direccion").toString(),
                                 so.getProperty("propietario").toString(),
+                                Integer.parseInt(so.getProperty("idMunicipio").toString()),
                                 so.getProperty("latitud").toString(),
                                 so.getProperty("longitud").toString()))
                         {

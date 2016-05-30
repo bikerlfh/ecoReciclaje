@@ -98,6 +98,21 @@ public class Principal extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
+            resultadoSincronizacion = sincronizarDatos.SincronizarPais();
+            if (resultadoSincronizacion.contains("Error"))
+            {
+                resultado = resultadoSincronizacion + ". ";
+            }
+            resultadoSincronizacion = sincronizarDatos.SincronizarDepartamento();
+            if (resultadoSincronizacion.contains("Error"))
+            {
+                resultado = resultadoSincronizacion + ". ";
+            }
+            resultadoSincronizacion = sincronizarDatos.SincronizarMunicipio();
+            if (resultadoSincronizacion.contains("Error"))
+            {
+                resultado = resultadoSincronizacion + ". ";
+            }
             resultadoSincronizacion = sincronizarDatos.SincronizarTipoInformacion();
             if (resultadoSincronizacion.contains("Error"))
             {

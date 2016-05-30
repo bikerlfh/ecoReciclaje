@@ -4,8 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import Model.DepartamentoModel;
 import Model.InformacionModel;
 import Model.MaterialModel;
+import Model.MunicipioModel;
+import Model.PaisModel;
 import Model.SitioReciclajeMaterialModel;
 import Model.SitioReciclajeModel;
 import Model.TipoInformacionModel;
@@ -25,6 +28,9 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
     public void onCreate (SQLiteDatabase db){
+        db.execSQL(PaisModel.CREATE_TABLE_PAIS);
+        db.execSQL(DepartamentoModel.CREATE_TABLE_DEPARTAMENTO);
+        db.execSQL(MunicipioModel.CREATE_TABLE_MUNICIPIO);
         db.execSQL(TipoInformacionModel.CREATE_TABLE_TIPOINFORMACION);
         db.execSQL(TipoMaterialModel.CREATE_TABLE_TIPOMATERIAL);
         db.execSQL(InformacionModel.CREATE_TABLE_INFORMACION);
