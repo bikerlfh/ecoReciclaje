@@ -45,7 +45,8 @@
             android:name=".LugaresActivity"
             android:label="@string/title_activity_lugares"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".InformacionActivity2"></activity>
+        <activity android:name=".InformacionActivity2" />
+        <activity android:name=".DetalleInformacionActivity"></activity>
     </application>
 
 </manifest>

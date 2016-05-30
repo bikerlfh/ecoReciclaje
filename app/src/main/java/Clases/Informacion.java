@@ -27,11 +27,12 @@ public class Informacion
 
     /** Propiedades Publicas */
     public TipoInformacion tipoInformacion;
-    public TipoMaterial tipoMaterial;
+    public Material material;
 
     public Informacion(Context context) {
         dbManager= new DbManager(context);
         this.tipoInformacion = new TipoInformacion(context);
+        this.material = new Material(context);
     }
 
      public int getIdInformacion() {
@@ -132,6 +133,9 @@ public class Informacion
             this.titulo = c.getString(c.getColumnIndex(InformacionModel.COLUMN_TITULO));
             this.descripcion = c.getString(c.getColumnIndex(InformacionModel.COLUMN_DESCRIPCION));
             this.fecha = c.getString(c.getColumnIndex(InformacionModel.COLUMN_FECHA));
+            // Cargamos los objetos embebidos
+            this.tipoInformacion.consultarTipoInformacionPorId(this.idTipoInformacion);
+            this.material.consultarMaterialPorId(this.idMaterial);
             c.close();
             return true;
         }
@@ -213,7 +217,9 @@ public class Informacion
         inf.titulo = cursor.getString(cursor.getColumnIndex(InformacionModel.COLUMN_TITULO));
         inf.descripcion = cursor.getString(cursor.getColumnIndex(InformacionModel.COLUMN_DESCRIPCION));
         inf.fecha = cursor.getString(cursor.getColumnIndex(InformacionModel.COLUMN_FECHA));
+        // Cargamos los objetos embebidos
         inf.tipoInformacion.consultarTipoInformacionPorId(inf.idTipoInformacion);
+        inf.material.consultarMaterialPorId(inf.idMaterial);
         return inf;
     }
 }

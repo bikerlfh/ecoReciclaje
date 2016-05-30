@@ -1,5 +1,7 @@
 package Adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tatisramos.ecoreciclaje.DetalleInformacionActivity;
 import com.example.tatisramos.ecoreciclaje.R;
 
 import java.util.List;
@@ -20,24 +23,38 @@ import Clases.Informacion;
  * Created by fercho on 5/29/2016.
  */
 public class RvAdapterInformacion extends RecyclerView.Adapter<RvAdapterInformacion.InformacionViewHolder>{
-    public static class InformacionViewHolder extends RecyclerView.ViewHolder {
+    public  class InformacionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cvInformacion;
         TextView titulo;
         TextView fecha;
         ImageView imagen;
 
-        InformacionViewHolder(View itemView) {
+        public InformacionViewHolder(View itemView) {
             super(itemView);
             cvInformacion = (CardView)itemView.findViewById(R.id.cvInformacion);
-            titulo = (TextView)itemView.findViewById(R.id.lbl_titulo_informacion);
+            titulo = (TextView)itemView.findViewById(R.id.lbl_titulo_detalleinformacion);
             fecha = (TextView)itemView.findViewById(R.id.lbl_fecha_informacion);
-            imagen = (ImageView)itemView.findViewById(R.id.imgIformacion);
+            imagen = (ImageView)itemView.findViewById(R.id.img_detalleinformacion);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            // obtenemos la posicion del item donde se ha dado click
+            int position = getPosition();
+            // creamos el intent para abrir la actividad DetalleInformacionActivity
+            Intent intent =new Intent(context,DetalleInformacionActivity.class);
+            // Pasamos por parametro la posicion
+            intent.putExtra(DetalleInformacionActivity.EXTRA_PARAMETER_POSICION,position);
+            context.startActivities(new Intent[]{intent});
+
         }
     }
     //List<Informacion> ListaInformacion;
-
-    public RvAdapterInformacion(){
+    private Context context;
+    public RvAdapterInformacion(Context context){
         //this.ListaInformacion = informacions;
+        this.context = context;
     }
 
     @Override

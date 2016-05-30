@@ -14,4 +14,5 @@
     <string name="title_titulo">Titulo</string>
     <string name="title_tipo_informacion">Tipo Información</string>
     <string name="title_fecha">Fecha</string>
+    <string name="title_activity_detalle_informacion_actividy">DetalleInformacionActividy</string>
 </resources>

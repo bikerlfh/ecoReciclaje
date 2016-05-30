@@ -2,8 +2,10 @@ package com.example.tatisramos.ecoreciclaje;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ActionMenuItemView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import Adapter.RvAdapterInformacion;
 import Clases.Busqueda;
@@ -18,7 +20,7 @@ public class InformacionActivity2 extends AppCompatActivity {
         setContentView(R.layout.activity_informacion2);
 
         /******************* RecicleView *******************/
-        rvInformacion = (RecyclerView)findViewById(R.id.rvInformacion);
+        rvInformacion = (RecyclerView) findViewById(R.id.rvInformacion);
         rvInformacion.setHasFixedSize(true);
         // Asignamos un layoud Manager
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -26,7 +28,7 @@ public class InformacionActivity2 extends AppCompatActivity {
         /******************* RecicleView *******************/
         Informacion informacion = new Informacion(this);
         Busqueda.ListadoInformacion = informacion.consultarTodoInformacion();
-        RvAdapterInformacion adapter = new RvAdapterInformacion();
+        RvAdapterInformacion adapter = new RvAdapterInformacion(this);
         rvInformacion.setAdapter(adapter);
     }
 }
