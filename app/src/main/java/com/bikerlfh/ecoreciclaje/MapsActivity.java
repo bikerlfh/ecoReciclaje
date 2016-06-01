@@ -67,7 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             public boolean onMarkerClick(Marker marker) {
                 LatLng position = marker.getPosition();
-                if (sitioReciclaje.consultarSitioReciclajePorLatitudLongitud(String.valueOf(position.latitude),String.valueOf(position.longitude)))
+                if (sitioReciclaje.consultarSitioReciclajePorLatitudLongitud(position.latitude,position.longitude))
                 {
                     Toast.makeText(MapsActivity.this,sitioReciclaje.getNombre()+"\n"+sitioReciclaje.getDireccion(),Toast.LENGTH_SHORT).show();
                 }
@@ -81,8 +81,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void mostrarMarcadorSitiosReciclaje()
     {
         for (SitioReciclaje sitio: Busqueda.ListadoSitioReciclaje) {
-            Double lat = Double.parseDouble(sitio.getLatitud());
-            Double lon = Double.parseDouble(sitio.getLongitud());
+            Double lat = sitio.getLatitud();
+            Double lon = sitio.getLongitud();
             LatLng latLng = new LatLng(lat,lon);
             mMap.addMarker(new MarkerOptions()
                     .position(latLng)

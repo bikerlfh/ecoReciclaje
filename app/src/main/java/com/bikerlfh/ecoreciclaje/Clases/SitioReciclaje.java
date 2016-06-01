@@ -19,8 +19,8 @@ public class SitioReciclaje {
     private String direccion;
     private String propietario;
     private int idMunicipio;
-    private String latitud;
-    private String longitud;
+    private double latitud;
+    private double longitud;
 
     private DbManager dbManager;
     private ContentValues contentValues;
@@ -73,23 +73,23 @@ public class SitioReciclaje {
         this.idMunicipio = idMunicipio;
     }
 
-    public String getLongitud() {
+    public double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(String longitud) {
+    public void setLongitud(double longitud) {
         this.longitud = longitud;
     }
 
-    public String getLatitud() {
+    public double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(String latitud) {
+    public void setLatitud(double latitud) {
         this.latitud = latitud;
     }
 
-    public boolean insertSitioReciclaje(int idSitioReciclaje,String nombre,String direccion, String propietario,int idMunicipio,String latitud,String longitud){
+    public boolean insertSitioReciclaje(int idSitioReciclaje,String nombre,String direccion, String propietario,int idMunicipio,double latitud,double longitud){
         contentValues = new ContentValues();
         contentValues.put(SitioReciclajeModel.COLUMN_ID,idSitioReciclaje);
         contentValues.put(SitioReciclajeModel.COLUMN_NOMBRE,nombre);
@@ -117,20 +117,20 @@ public class SitioReciclaje {
             this.direccion = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_DIRECCION));
             this.propietario = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_PROPIETARIO));
             this.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
-            this.latitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
-            this.longitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
+            this.latitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
+            this.longitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
             this.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(this.idSitioReciclaje);
             return true;
         }
         return false;
     }
 
-    public boolean consultarSitioReciclajePorLatitudLongitud(String latitud,String longitud)
+    public boolean consultarSitioReciclajePorLatitudLongitud(double latitud,double longitud)
     {
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.RawQuery("SELECT * FROM "+ SitioReciclajeModel.NAME_TABLE + " WHERE "+SitioReciclajeModel.COLUMN_LATITUD + "='"+latitud+"' and "+SitioReciclajeModel.COLUMN_LONGITUD + "='"+longitud+"'",null);
-        //Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[] { "*" },SitioReciclajeModel.COLUMN_LATITUD + "=? and "+SitioReciclajeModel.COLUMN_LONGITUD + "=?",new String[] {latitud,longitud},null,null,null,null);
+        //Cursor c = dbManager.RawQuery("SELECT * FROM "+ SitioReciclajeModel.NAME_TABLE + " WHERE "+SitioReciclajeModel.COLUMN_LATITUD + "='"+latitud+"' and "+SitioReciclajeModel.COLUMN_LONGITUD + "='"+longitud+"'",null);
+        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[] { "*" },SitioReciclajeModel.COLUMN_LATITUD + "=? and "+SitioReciclajeModel.COLUMN_LONGITUD + "=?",new String[] {String.valueOf(latitud),String.valueOf(longitud)},null,null,null,null);
         // Si hay Tipo Informacion
         if (c.moveToFirst())
         {
@@ -139,8 +139,8 @@ public class SitioReciclaje {
             this.direccion = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_DIRECCION));
             this.propietario = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_PROPIETARIO));
             this.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
-            this.latitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
-            this.longitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
+            this.latitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
+            this.longitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
             this.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(this.idSitioReciclaje);
             return true;
         }
@@ -177,8 +177,8 @@ public class SitioReciclaje {
                 sitio.direccion = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_DIRECCION));
                 sitio.propietario = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_PROPIETARIO));
                 sitio.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
-                sitio.latitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
-                sitio.longitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
+                sitio.latitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
+                sitio.longitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
                 sitio.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(sitio.idSitioReciclaje);
                 ListadoSitioReciclaje.add(sitio);
             }
@@ -205,8 +205,8 @@ public class SitioReciclaje {
                 sitio.direccion = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_DIRECCION));
                 sitio.propietario = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_PROPIETARIO));
                 sitio.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
-                sitio.latitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
-                sitio.longitud = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
+                sitio.latitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
+                sitio.longitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
                 sitio.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(sitio.idSitioReciclaje);
                 ListadoSitioReciclaje.add(sitio);
             }

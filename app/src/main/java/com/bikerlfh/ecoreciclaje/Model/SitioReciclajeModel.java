@@ -20,6 +20,6 @@ public class SitioReciclajeModel
             COLUMN_DIRECCION + " text null," +
             COLUMN_PROPIETARIO + " text null," +
             COLUMN_ID_MUNICIPIO + " integer not null,"+
-            COLUMN_LATITUD + " text null," +
-            COLUMN_LONGITUD + " text not null)";
+            COLUMN_LATITUD + " real null," +
+            COLUMN_LONGITUD + " real not null)";
 }

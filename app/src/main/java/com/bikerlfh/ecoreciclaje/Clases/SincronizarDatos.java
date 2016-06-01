@@ -309,8 +309,8 @@ public class SincronizarDatos
                                 so.getProperty("direccion").toString(),
                                 so.getProperty("propietario").toString(),
                                 Integer.parseInt(so.getProperty("idMunicipio").toString()),
-                                so.getProperty("latitud").toString(),
-                                so.getProperty("longitud").toString()))
+                                Double.parseDouble(so.getProperty("latitud").toString()),
+                                Double.parseDouble(so.getProperty("longitud").toString())))
                         {
                             return "Error: al intentar insertar sitio de reciclaje";
                         }
