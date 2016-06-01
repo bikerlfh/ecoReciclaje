@@ -17,7 +17,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.bikerlfh.ecoreciclaje.R;
 
 import java.io.IOException;
 import java.util.List;
@@ -52,32 +51,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        sitioReciclaje =  new SitioReciclaje(this);
-        List<Address> addressList = null;
         Geocoder geocoder = new Geocoder(this);
-        try {
+        /*try {
+            // se consulta por medio de la clase GEOCODER la locación de COLOMBIA
             Address address = geocoder.getFromLocationName("COLOMBIA",1).get(0);
+            // Sacamos la latitud y longitud creando un objeto de tipo LatLng
             LatLng colombia = new LatLng(address.getLatitude(), address.getLongitude());
-            //.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+            LatLng colombia = new LatLng(4.570868, -74.297333);
+            //Movemos la camara del mapa a la latitud y longitud de colombia
             mMap.moveCamera(CameraUpdateFactory.newLatLng(colombia));
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+        // creamos un objeto LatLng con las coordenadas de COLOMBIA
+        LatLng colombia = new LatLng(4.570868, -74.297333);
+        //Movemos la camara del mapa a la latitud y longitud de colombia
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(colombia));
+
         // EVENTO DE CLICK AL MARCADOR
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             public boolean onMarkerClick(Marker marker) {
                 LatLng position = marker.getPosition();
+                sitioReciclaje =  new SitioReciclaje(MapsActivity.this);
+                // Se consulta el sitio reciclaje por latitud y longitud (Estos son unicos)
                 if (sitioReciclaje.consultarSitioReciclajePorLatitudLongitud(position.latitude,position.longitude))
                 {
                     Toast.makeText(MapsActivity.this,sitioReciclaje.getNombre()+"\n"+sitioReciclaje.getDireccion(),Toast.LENGTH_SHORT).show();
                 }
-
                 return false;
             }
         });
-
+        // Se llama al metodo siguiente para mostrar los marcadores.
         mostrarMarcadorSitiosReciclaje();
     }
+
+    /**
+     * Evento que pone marcadores en los sitios de reciclaje
+     */
     private void mostrarMarcadorSitiosReciclaje()
     {
         for (SitioReciclaje sitio: Busqueda.ListadoSitioReciclaje) {
