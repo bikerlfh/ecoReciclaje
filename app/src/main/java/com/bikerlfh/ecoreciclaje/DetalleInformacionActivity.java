@@ -2,6 +2,8 @@ package com.bikerlfh.ecoreciclaje;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ public class DetalleInformacionActivity extends AppCompatActivity {
     private Informacion informacion;
     private TextView lblTitulo,lblDescripcion,lblMaterial,lblFecha;
     private ImageView imgInformacion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +24,7 @@ public class DetalleInformacionActivity extends AppCompatActivity {
 
         lblTitulo = (TextView)findViewById(R.id.lbl_titulo_detalleinformacion);
         lblDescripcion = (TextView)findViewById(R.id.lbl_descripcion_detalleinformacion);
+        lblDescripcion.setMovementMethod(new ScrollingMovementMethod());
         lblMaterial = (TextView)findViewById(R.id.lbl_material_detalleinformacion);
         lblMaterial.setText("");
         lblFecha = (TextView)findViewById(R.id.lbl_fecha_detalleinformacion);

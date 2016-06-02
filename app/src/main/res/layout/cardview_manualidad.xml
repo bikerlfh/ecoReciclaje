@@ -10,9 +10,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/cvManualidad"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="#FEFEFE"
+        android:background="#f6a85b"
         android:layout_margin="1dp"
-        app:cardCornerRadius="4dp">
+        app:cardCornerRadius="4dp"
+        android:backgroundTint="#b4d7b9">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -37,15 +38,18 @@
                 android:layout_toRightOf="@+id/img_cv_manualidad"
                 android:layout_alignParentTop="true"
                 android:textSize="20sp"
-                android:text="@string/title_titulo" />
+                android:text="@string/title_titulo"
+                android:textColor="@android:color/holo_green_dark" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/lbl_cv_fecha_manualidad"
-                android:layout_toRightOf="@+id/img_cv_manualidad"
-                android:layout_below="@+id/lbl_cv_titulo_manualidad"
-                android:text="@string/title_fecha" />
+                android:text="@string/title_fecha"
+                android:layout_alignBottom="@+id/img_cv_manualidad"
+                android:layout_alignLeft="@+id/lbl_cv_titulo_manualidad"
+                android:layout_alignStart="@+id/lbl_cv_titulo_manualidad"
+                android:textColor="@color/abc_input_method_navigation_guard" />
 
         </RelativeLayout>
 

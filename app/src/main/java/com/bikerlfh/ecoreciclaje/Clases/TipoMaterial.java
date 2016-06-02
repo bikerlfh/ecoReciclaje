@@ -90,7 +90,7 @@ public class TipoMaterial
             this.idTipoMaterial = idTipoMaterial;
             this.codigo =c.getString(c.getColumnIndex(TipoMaterialModel.COLUMN_CODIGO));
             this.descripcion = c.getString(c.getColumnIndex(TipoMaterialModel.COLUMN_DESCRIPCION));
-            this.imagen = CargarImagen(this.codigo);
+            //this.imagen = CargarImagen(this.codigo);
 
             return true;
         }
@@ -107,7 +107,7 @@ public class TipoMaterial
             this.idTipoMaterial = c.getInt(c.getColumnIndex(TipoMaterialModel.COLUMN_ID));;
             this.codigo = c.getString(c.getColumnIndex(TipoMaterialModel.COLUMN_CODIGO));
             this.descripcion = c.getString(c.getColumnIndex(TipoMaterialModel.COLUMN_DESCRIPCION));
-            this.imagen = CargarImagen(this.codigo);
+            //this.imagen = CargarImagen(this.codigo);
 
             return true;
         }
@@ -129,56 +129,12 @@ public class TipoMaterial
                 tipoMaterial.idTipoMaterial = c.getInt(c.getColumnIndex(TipoMaterialModel.COLUMN_ID));
                 tipoMaterial.codigo =c.getString(c.getColumnIndex(TipoMaterialModel.COLUMN_CODIGO));
                 tipoMaterial.descripcion = c.getString(c.getColumnIndex(TipoMaterialModel.COLUMN_DESCRIPCION));
-                tipoMaterial.imagen = CargarImagen(tipoMaterial.codigo);
+                //tipoMaterial.imagen = CargarImagen(tipoMaterial.codigo);
                 ListadoTipoMaterial.add(tipoMaterial);
             }
             while (c.moveToNext());
         }
         return ListadoTipoMaterial;
     }
-    private int CargarImagen(String codigo)
-    {
-        int imagen = 0;
-        switch (codigo)
-        {
-            case "01":
-                //Papel y Carton
-                imagen = R.drawable.ic_inf;
-                break;
-            case "02":
-                // Chatarra y metal
-                imagen = R.drawable.ic_inf;
-                break;
-            case "03":
-                //Pilas y baterias
-                imagen = R.drawable.ic_inf;
-                break;
-            case "04":
-                //Pinturas y aceites
-                imagen = R.drawable.ic_inf;
-                break;
-            case "05":
-                //Plastico
-                imagen = R.drawable.ic_inf;
-                break;
-            case "06":
-                //Vidrios
-                imagen = R.drawable.ic_inf;
-                break;
-            case "07  ":
-                //Textiles
-                imagen = R.drawable.ic_inf;
-                break;
-            case "08":
-                //Organico
-                imagen = R.drawable.ic_inf;
-                break;
-            case "09":
-                //Medicamentos
-                imagen = R.drawable.ic_inf;
-                break;
 
-        }
-        return imagen;
-    }
 }
