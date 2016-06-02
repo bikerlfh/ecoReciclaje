@@ -145,8 +145,6 @@ public class Principal extends AppCompatActivity {
             {
                 resultado += resultadoSincronizacion+ ". ";
             }
-            // Cargamos en el listado los sitios de reciclaje
-            Busqueda.ListadoSitioReciclaje = sitioReciclaje.consultarTodoSitioReciclaje();
             return null;
         }
 

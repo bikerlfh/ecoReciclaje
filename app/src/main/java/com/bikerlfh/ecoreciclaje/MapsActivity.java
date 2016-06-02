@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.bikerlfh.ecoreciclaje.Clases.Busqueda;
 import com.bikerlfh.ecoreciclaje.Clases.SitioReciclaje;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,6 +23,7 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private List<SitioReciclaje> ListadoSitioReciclaje;
     private SitioReciclaje sitioReciclaje;
 
     @Override
@@ -35,7 +35,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
+        sitioReciclaje = new SitioReciclaje(this);
+        ListadoSitioReciclaje = sitioReciclaje.consultarTodoSitioReciclaje();
     }
 
 
@@ -72,7 +73,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             public boolean onMarkerClick(Marker marker) {
                 LatLng position = marker.getPosition();
-                sitioReciclaje =  new SitioReciclaje(MapsActivity.this);
                 // Se consulta el sitio reciclaje por latitud y longitud (Estos son unicos)
                 if (sitioReciclaje.consultarSitioReciclajePorLatitudLongitud(position.latitude,position.longitude))
                 {
@@ -90,7 +90,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     private void mostrarMarcadorSitiosReciclaje()
     {
-        for (SitioReciclaje sitio: Busqueda.ListadoSitioReciclaje) {
+        for (SitioReciclaje sitio: ListadoSitioReciclaje) {
             Double lat = sitio.getLatitud();
             Double lon = sitio.getLongitud();
             LatLng latLng = new LatLng(lat,lon);
