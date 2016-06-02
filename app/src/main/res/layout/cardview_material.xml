@@ -10,9 +10,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/cvMaterial"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="#FEFEFE"
+        android:background="#f6a85b"
         android:layout_margin="1dp"
-        app:cardCornerRadius="4dp">
+        app:cardCornerRadius="4dp"
+        android:backgroundTint="#b4d7b9">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -23,10 +24,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/img_cv_material"
-                android:src="@drawable/ic_inf"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_man"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,7 +37,8 @@
                 android:layout_toRightOf="@+id/img_detallematerial"
                 android:layout_alignParentTop="true"
                 android:textSize="20sp"
-                android:text="@string/title_nombrematerial" />
+                android:text="@string/title_nombrematerial"
+                android:textColor="@android:color/holo_green_dark" />
 
         </RelativeLayout>
 

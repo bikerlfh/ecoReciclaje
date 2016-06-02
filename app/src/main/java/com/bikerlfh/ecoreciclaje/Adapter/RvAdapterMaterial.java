@@ -67,7 +67,8 @@ public class RvAdapterMaterial extends RecyclerView.Adapter<RvAdapterMaterial.Ma
     public void onBindViewHolder(MaterialViewHolder materialViewHolder, int i) {
         Material mat = Busqueda.ListadoMaterial.get(i);
         materialViewHolder.titulo.setText(mat.getNombre());
-        materialViewHolder.imagen.setImageResource(mat.tipoMaterial.imagen);
+        materialViewHolder.imagen.setImageResource(mat.imagen);
+
     }
 
     @Override

@@ -34,7 +34,7 @@ public class DetalleMaterialActivity extends AppCompatActivity {
             if (this.material.tipoMaterial.getIdTipoMaterial() > 0)
                 lblTipoMaterial.setText(this.material.tipoMaterial.getCodigo() + " - " + this.material.tipoMaterial.getDescripcion());
             lblDescripcion.setText(this.material.getDescripcion());
-            imgMaterial.setImageResource(this.material.tipoMaterial.imagen);
+            imgMaterial.setImageResource(this.material.imagen);
 
         }
 

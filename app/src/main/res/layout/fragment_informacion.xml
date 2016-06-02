@@ -9,6 +9,6 @@
         android:layout_height="match_parent"
         android:id="@+id/rvInformacion"
         android:scrollbars="vertical"
-        />
+        android:clickable="false" />
 
 </LinearLayout>

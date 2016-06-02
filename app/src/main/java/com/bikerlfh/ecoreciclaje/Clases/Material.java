@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bikerlfh.ecoreciclaje.Model.MaterialModel;
+import com.bikerlfh.ecoreciclaje.R;
 
 /**
  * Created by TatisRamos on 13/05/2016.
@@ -20,8 +21,11 @@ public class Material {
     private String nombre;
     private String descripcion;
 
+    public int imagen;
+
     private DbManager dbManager;
     private  ContentValues contentValues;
+
 
 
     public TipoMaterial tipoMaterial;
@@ -100,7 +104,8 @@ public class Material {
             this.descripcion = c.getString(c.getColumnIndex(MaterialModel.COLUMN_DESCRIPCION));
             // Cargamos los objetos embebidos
             this.tipoMaterial.consultarTipoMaterialPorId(this.idTipoMaterial);
-            c.close();
+            this.imagen = CargarImagen(this.codigo);
+
             return true;
         }
         return false;
@@ -155,7 +160,7 @@ public class Material {
         return ListadoMaterial;
     }
     private Material CrearObjetoMaterial(Cursor cursor)
-    {
+     {
         Material mat = new Material(this.dbManager.context);
         mat.idMaterial = cursor.getInt(cursor.getColumnIndex(MaterialModel.COLUMN_ID));
         mat.idTipoMaterial = cursor.getInt(cursor.getColumnIndex(MaterialModel.COLUMN_ID_TIPO_MATERIAL));
@@ -163,8 +168,56 @@ public class Material {
         mat.nombre = cursor.getString(cursor.getColumnIndex(MaterialModel.COLUMN_NOMBRE));
         mat.descripcion = cursor.getString(cursor.getColumnIndex(MaterialModel.COLUMN_DESCRIPCION));
 
+
         // Cargamos los objetos embebidos
         mat.tipoMaterial.consultarTipoMaterialPorId(mat.idTipoMaterial);
+        mat.imagen = CargarImagen(mat.codigo);
         return mat;
+    }
+
+    private int CargarImagen(String codigo)
+    {
+        int imagen = 0;
+        switch (codigo)
+        {
+            case "01":
+                //Papel y Carton
+                imagen = R.drawable.ic_inf;
+                break;
+            case "02":
+                // Chatarra y metal
+                imagen = R.drawable.ic_inf;
+                break;
+            case "03":
+                //Pilas y baterias
+                imagen = R.drawable.ic_inf;
+                break;
+            case "04":
+                //Pinturas y aceites
+                imagen = R.drawable.ic_inf;
+                break;
+            case "05":
+                //Plastico
+                imagen = R.drawable.ic_inf;
+                break;
+            case "06":
+                //Vidrios
+                imagen = R.drawable.ic_inf;
+                break;
+            case "07  ":
+                //Textiles
+                imagen = R.drawable.ic_inf;
+                break;
+            case "08":
+                //Organico
+                imagen = R.drawable.ic_inf;
+                break;
+            case "09":
+                //Medicamentos
+                imagen = R.drawable.ic_inf;
+                break;
+
+        }
+        return imagen;
     }
 }

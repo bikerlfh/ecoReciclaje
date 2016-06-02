@@ -29,7 +29,8 @@
         android:textSize="20sp"
         android:text="@string/title_titulo"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textColor="@android:color/holo_green_dark" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -37,7 +38,8 @@
         android:id="@+id/lbl_fecha_detalleinformacion"
         android:layout_toRightOf="@+id/img_detalleinformacion"
         android:layout_below="@+id/lbl_titulo_detalleinformacion"
-        android:text="@string/title_fecha" />
+        android:text="@string/title_fecha"
+        android:textColor="@color/abc_input_method_navigation_guard" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,17 +50,22 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/lbl_titulo_detalleinformacion"
         android:layout_alignEnd="@+id/lbl_titulo_detalleinformacion"
+        android:textColor="@color/abc_search_url_text_pressed"
         android:layout_alignParentBottom="true"
+        android:textSize="20px"
         android:layout_below="@+id/lbl_material_detalleinformacion" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
         android:id="@+id/lbl_material_detalleinformacion"
         android:layout_below="@+id/img_detalleinformacion"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+
+        android:maxLines = "@android:integer/config_longAnimTime"
+        android:scrollbars = "vertical"
+        android:layout_height="wrap_content"
         android:layout_marginTop="36dp" />
+
 </RelativeLayout>
