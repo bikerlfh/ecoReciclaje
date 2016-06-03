@@ -22,6 +22,8 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    public static final String EXTRA_PARAMETER_UBICACION = "mapsactivity.ubicacion";
+    public static final String EXTRA_PARAMETER_ID_MATERIAL = "mapsactivity.idMaterial";
     private GoogleMap mMap;
     private List<SitioReciclaje> ListadoSitioReciclaje;
     private SitioReciclaje sitioReciclaje;
@@ -35,8 +37,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        sitioReciclaje = new SitioReciclaje(this);
-        ListadoSitioReciclaje = sitioReciclaje.consultarTodoSitioReciclaje();
+        int idMaterial = getIntent().getIntExtra(EXTRA_PARAMETER_ID_MATERIAL, 0);
+        if(idMaterial > 0) {
+            sitioReciclaje = new SitioReciclaje(this);
+            ListadoSitioReciclaje = sitioReciclaje.ConsultarSitioReciclajePorIdMaterial(idMaterial);
+        }
     }
 
 

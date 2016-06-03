@@ -7,6 +7,7 @@ import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bikerlfh.ecoreciclaje.Model.SitioReciclajeMaterialModel;
 import com.bikerlfh.ecoreciclaje.Model.SitioReciclajeModel;
 
 /**
@@ -29,7 +30,7 @@ public class SitioReciclaje {
     public List<SitioReciclajeMaterial> ListadoSitioReciclajeMaterial;
 
     public SitioReciclaje(Context context) {
-        dbManager= new DbManager(context);
+        dbManager = new DbManager(context);
         ListadoSitioReciclajeMaterial = new ArrayList<>();
     }
 
@@ -89,97 +90,67 @@ public class SitioReciclaje {
         this.latitud = latitud;
     }
 
-    public boolean insertSitioReciclaje(int idSitioReciclaje,String nombre,String direccion, String telefono,int idMunicipio,double latitud,double longitud){
+    public boolean insertSitioReciclaje(int idSitioReciclaje, String nombre, String direccion, String telefono, int idMunicipio, double latitud, double longitud) {
         contentValues = new ContentValues();
-        contentValues.put(SitioReciclajeModel.COLUMN_ID,idSitioReciclaje);
-        contentValues.put(SitioReciclajeModel.COLUMN_NOMBRE,nombre);
-        contentValues.put(SitioReciclajeModel.COLUMN_DIRECCION,direccion);
-        contentValues.put(SitioReciclajeModel.COLUMN_TELEFONO,telefono);
-        contentValues.put(SitioReciclajeModel.COLUMN_ID_MUNICIPIO,idMunicipio);
-        contentValues.put(SitioReciclajeModel.COLUMN_LATITUD,latitud);
-        contentValues.put(SitioReciclajeModel.COLUMN_LONGITUD,longitud);
+        contentValues.put(SitioReciclajeModel.COLUMN_ID, idSitioReciclaje);
+        contentValues.put(SitioReciclajeModel.COLUMN_NOMBRE, nombre);
+        contentValues.put(SitioReciclajeModel.COLUMN_DIRECCION, direccion);
+        contentValues.put(SitioReciclajeModel.COLUMN_TELEFONO, telefono);
+        contentValues.put(SitioReciclajeModel.COLUMN_ID_MUNICIPIO, idMunicipio);
+        contentValues.put(SitioReciclajeModel.COLUMN_LATITUD, latitud);
+        contentValues.put(SitioReciclajeModel.COLUMN_LONGITUD, longitud);
 
-        if(dbManager.Insert(SitioReciclajeModel.NAME_TABLE,contentValues))
+        if (dbManager.Insert(SitioReciclajeModel.NAME_TABLE, contentValues))
             return true;
         return false;
     }
 
-    public boolean consultarSitioReciclajePorId(int idSitioReciclaje)
-    {
+    public boolean consultarSitioReciclajePorId(int idSitioReciclaje) {
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[] { "*" },SitioReciclajeModel.COLUMN_ID + "=?",new String[] {String.valueOf(idSitioReciclaje)},null,null,null,null);
+        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[]{"*"}, SitioReciclajeModel.COLUMN_ID + "=?", new String[]{String.valueOf(idSitioReciclaje)}, null, null, null, null);
         // Si hay Tipo Informacion
-        if (c.moveToFirst())
-        {
-            this.idSitioReciclaje = idSitioReciclaje;
-            this.nombre = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_NOMBRE));
-            this.direccion = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_DIRECCION));
-            this.telefono = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_TELEFONO));
-            this.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
-            this.latitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
-            this.longitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
-            this.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(this.idSitioReciclaje);
+        if (c.moveToFirst()) {
+            this.LlenarCampos(c);
             return true;
         }
         return false;
     }
 
-    public boolean consultarSitioReciclajePorLatitudLongitud(double latitud,double longitud)
-    {
+    public boolean consultarSitioReciclajePorLatitudLongitud(double latitud, double longitud) {
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
         //Cursor c = dbManager.RawQuery("SELECT * FROM "+ SitioReciclajeModel.NAME_TABLE + " WHERE "+SitioReciclajeModel.COLUMN_LATITUD + "='"+latitud+"' and "+SitioReciclajeModel.COLUMN_LONGITUD + "='"+longitud+"'",null);
-        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[] { "*" },SitioReciclajeModel.COLUMN_LATITUD + "=? and "+SitioReciclajeModel.COLUMN_LONGITUD + "=?",new String[] {String.valueOf(latitud),String.valueOf(longitud)},null,null,null,null);
+        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[]{"*"}, SitioReciclajeModel.COLUMN_LATITUD + "=? and " + SitioReciclajeModel.COLUMN_LONGITUD + "=?", new String[]{String.valueOf(latitud), String.valueOf(longitud)}, null, null, null, null);
         // Si hay Tipo Informacion
-        if (c.moveToFirst())
-        {
-            this.idSitioReciclaje = idSitioReciclaje;
-            this.nombre = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_NOMBRE));
-            this.direccion = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_DIRECCION));
-            this.telefono = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_TELEFONO));
-            this.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
-            this.latitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
-            this.longitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
-            this.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(this.idSitioReciclaje);
+        if (c.moveToFirst()) {
+            this.LlenarCampos(c);
             return true;
         }
         return false;
     }
 
-    public int consultarMaxId()
-    {
-        Cursor c = dbManager.RawQuery("SELECT MAX("+ SitioReciclajeModel.COLUMN_ID+") AS "+SitioReciclajeModel.COLUMN_ID+" FROM "+SitioReciclajeModel.NAME_TABLE,null);
+    public int consultarMaxId() {
+        Cursor c = dbManager.RawQuery("SELECT MAX(" + SitioReciclajeModel.COLUMN_ID + ") AS " + SitioReciclajeModel.COLUMN_ID + " FROM " + SitioReciclajeModel.NAME_TABLE, null);
         // Si hay Tipo Informacion
-        if (c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             if (c.getCount() > 0)
                 return c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID));
         }
         return 0;
     }
 
-    public List<SitioReciclaje> consultarTodoSitioReciclaje()
-    {
+    public List<SitioReciclaje> consultarTodoSitioReciclaje() {
         List<SitioReciclaje> ListadoSitioReciclaje = new ArrayList<SitioReciclaje>();
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos
-        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[] { "*" },null,null,null,null,null,null);
+        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[]{"*"}, null, null, null, null, null, null);
         // Si hay Tipo Informacion
-        if (c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             // Recorremos el cursor y llenamos el Objeto sitio el cual se agrega a la ListadoSitioReciclaje
-            do
-            {
+            do {
                 SitioReciclaje sitio = new SitioReciclaje(this.dbManager.context);
-                sitio.idSitioReciclaje = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID));
-                sitio.nombre = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_NOMBRE));
-                sitio.direccion = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_DIRECCION));
-                sitio.telefono = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_TELEFONO));
-                sitio.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
-                sitio.latitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
-                sitio.longitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
-                sitio.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(sitio.idSitioReciclaje);
+                sitio.LlenarCampos(c);
                 ListadoSitioReciclaje.add(sitio);
             }
             while (c.moveToNext());
@@ -187,38 +158,57 @@ public class SitioReciclaje {
         return ListadoSitioReciclaje;
     }
 
-    public List<SitioReciclaje> consultarSitioReciclajePorIdMunicipio(int idMunicipio)
-    {
+    public List<SitioReciclaje> consultarSitioReciclajePorIdMunicipio(int idMunicipio) {
         List<SitioReciclaje> ListadoSitioReciclaje = new ArrayList<SitioReciclaje>();
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos
-        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[] { "*" },SitioReciclajeModel.COLUMN_ID_MUNICIPIO,new String[] {String.valueOf(idMunicipio)},null,null,null,null);
+        Cursor c = dbManager.Select(SitioReciclajeModel.NAME_TABLE, new String[]{"*"}, SitioReciclajeModel.COLUMN_ID_MUNICIPIO, new String[]{String.valueOf(idMunicipio)}, null, null, null, null);
         // Si hay Tipo Informacion
-        if (c.moveToFirst())
-        {
+        if (c.moveToFirst()) {
             // Recorremos el cursor y llenamos el Objeto sitio el cual se agrega a la ListadoSitioReciclaje
-            do
-            {
+            do {
                 SitioReciclaje sitio = new SitioReciclaje(this.dbManager.context);
-                sitio.idSitioReciclaje = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID));
-                sitio.nombre = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_NOMBRE));
-                sitio.direccion = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_DIRECCION));
-                sitio.telefono = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_TELEFONO));
-                sitio.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
-                sitio.latitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
-                sitio.longitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
-                sitio.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(sitio.idSitioReciclaje);
+                sitio.LlenarCampos(c);
                 ListadoSitioReciclaje.add(sitio);
             }
             while (c.moveToNext());
         }
         return ListadoSitioReciclaje;
     }
-
-    private List<SitioReciclajeMaterial> ConsultarSitioReciclajeMaterial(int idSitioReciclaje)
+    public List<SitioReciclaje> ConsultarSitioReciclajePorIdMaterial(int idMaterial)
     {
+        List<SitioReciclaje> ListadoSitioReciclaje = new ArrayList<SitioReciclaje>();
+        // Se realiza la consulta a la base de datos.
+        // Indicamos que nos traiga todos los campos
+        Cursor c = dbManager.RawQuery("SELECT DISTINCT s."+SitioReciclajeModel.COLUMN_ID + " FROM " + SitioReciclajeModel.NAME_TABLE+ " s " +
+                "INNER JOIN "+ SitioReciclajeMaterialModel.NAME_TABLE + " sm ON s."+SitioReciclajeModel.COLUMN_ID + "=sm."+ SitioReciclajeMaterialModel.COLUMN_ID_SITIO_RECICLAJE +" WHERE " +
+                "sm."+SitioReciclajeMaterialModel.COLUMN_ID_MATERIAL+"="+String.valueOf(idMaterial), null);
+        // Si hay Tipo Informacion
+        if (c.moveToFirst()) {
+            // Recorremos el cursor y llenamos el Objeto sitio el cual se agrega a la ListadoSitioReciclaje
+            do {
+                SitioReciclaje sitio = new SitioReciclaje(this.dbManager.context);
+                sitio.consultarSitioReciclajePorId(c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID)));
+                ListadoSitioReciclaje.add(sitio);
+            }
+            while (c.moveToNext());
+        }
+        return ListadoSitioReciclaje;
+    }
+    private List<SitioReciclajeMaterial> ConsultarSitioReciclajeMaterial(int idSitioReciclaje) {
         SitioReciclajeMaterial sitioReciclajeMaterial = new SitioReciclajeMaterial(this.dbManager.context);
         return sitioReciclajeMaterial.consultarSitioReciclajeMaterialPorIdSitioReciclaje(idSitioReciclaje);
     }
 
+    private void LlenarCampos(Cursor c)
+    {
+        this.idSitioReciclaje = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID));
+        this.nombre = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_NOMBRE));
+        this.direccion = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_DIRECCION));
+        this.telefono = c.getString(c.getColumnIndex(SitioReciclajeModel.COLUMN_TELEFONO));
+        this.idMunicipio = c.getInt(c.getColumnIndex(SitioReciclajeModel.COLUMN_ID_MUNICIPIO));
+        this.latitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LATITUD));
+        this.longitud = c.getDouble(c.getColumnIndex(SitioReciclajeModel.COLUMN_LONGITUD));
+        this.ListadoSitioReciclajeMaterial = ConsultarSitioReciclajeMaterial(this.idSitioReciclaje);
+    }
 }

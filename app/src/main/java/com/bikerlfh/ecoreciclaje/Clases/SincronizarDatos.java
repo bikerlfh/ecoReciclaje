@@ -344,8 +344,8 @@ public class SincronizarDatos
                     if (so != null)
                     {
                         if(!sitioReciclajeMaterial.insertSitioReciclajeMaterial(Long.parseLong(so.getProperty("idSitioReciclajeMaterial").toString()),
-                                Integer.parseInt(so.getProperty("idSitioReciclajeMaterial").toString()),
-                                Long.parseLong(so.getProperty("idSitioReciclajeMaterial").toString())))
+                                Integer.parseInt(so.getProperty("idMaterial").toString()),
+                                Long.parseLong(so.getProperty("idSitioReciclaje").toString())))
                         {
                             return "Error: al intentar insertar sitio de reciclaje Material";
                         }
