@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.bikerlfh.ecoreciclaje.Adapter.SitioInfoWindowsAdapter;
 import com.bikerlfh.ecoreciclaje.Clases.SitioReciclaje;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -72,7 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // creamos un objeto LatLng con las coordenadas de COLOMBIA
         LatLng colombia = new LatLng(4.570868, -74.297333);
         //Movemos la camara del mapa a la latitud y longitud de colombia
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(colombia));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(colombia,5));
 
         // EVENTO DE CLICK AL MARCADOR
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -81,7 +82,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // Se consulta el sitio reciclaje por latitud y longitud (Estos son unicos)
                 if (sitioReciclaje.consultarSitioReciclajePorLatitudLongitud(position.latitude,position.longitude))
                 {
-                    Toast.makeText(MapsActivity.this,sitioReciclaje.getNombre()+"\n"+sitioReciclaje.getDireccion(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MapsActivity.this,sitioReciclaje.getNombre()+"\n"+sitioReciclaje.getDireccion(),Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
@@ -102,8 +103,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.addMarker(new MarkerOptions()
                     .position(latLng)
                     .title(sitio.getNombre())
-                    .snippet("Dirección:" + sitio.getDireccion())
+                    .snippet("Dir: " + sitio.getDireccion()+"\n"+"Tel: " + sitio.getTelefono())
                     /*.icon(BitmapDescriptorFactory.fromResource(R.drawable.recycling))*/);
         }
+        mMap.setInfoWindowAdapter(new SitioInfoWindowsAdapter(getLayoutInflater()));
     }
 }
