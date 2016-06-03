@@ -204,7 +204,7 @@ public class Material {
                 //Vidrios
                 imagen = R.drawable.ic_inf;
                 break;
-            case "07  ":
+            case "07":
                 //Textiles
                 imagen = R.drawable.ic_inf;
                 break;
