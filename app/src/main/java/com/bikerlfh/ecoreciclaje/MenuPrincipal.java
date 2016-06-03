@@ -31,6 +31,7 @@ public class MenuPrincipal extends AppCompatActivity
                    ManualidadFragment.OnFragmentInteractionListener,
                    MaterialFragment.OnFragmentInteractionListener , SitioReciclajeFragment.OnFragmentInteractionListener{
 
+    private FragmentTransaction transaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,11 @@ public class MenuPrincipal extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        transaction = getSupportFragmentManager().beginTransaction();
+        InformacionFragment informacionFragment = new InformacionFragment();
+        transaction = transaction.replace(R.id.layout_principal,informacionFragment);
+        transaction.commit();
     }
 
     @Override
@@ -97,7 +103,7 @@ public class MenuPrincipal extends AppCompatActivity
 
         // Handle navigation view item clicks here.
         Intent intent = null;
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction = getSupportFragmentManager().beginTransaction();
         switch (item.getItemId())
         {
             case R.id.nav_informacion:
