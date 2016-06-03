@@ -307,7 +307,7 @@ public class SincronizarDatos
                         if(!sitioReciclaje.insertSitioReciclaje(Integer.parseInt(so.getProperty("idSitioReciclaje").toString()),
                                 so.getProperty("nombre").toString(),
                                 so.getProperty("direccion").toString(),
-                                so.getProperty("propietario").toString(),
+                                so.getProperty("telefono").toString(),
                                 Integer.parseInt(so.getProperty("idMunicipio").toString()),
                                 Double.parseDouble(so.getProperty("latitud").toString()),
                                 Double.parseDouble(so.getProperty("longitud").toString())))

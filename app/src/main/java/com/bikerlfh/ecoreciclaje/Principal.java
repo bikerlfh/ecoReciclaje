@@ -12,10 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-import com.bikerlfh.ecoreciclaje.R;
-
-import com.bikerlfh.ecoreciclaje.Clases.Busqueda;
 import com.bikerlfh.ecoreciclaje.Clases.SincronizarDatos;
 import com.bikerlfh.ecoreciclaje.Clases.SitioReciclaje;
 
@@ -29,7 +25,7 @@ public class Principal extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //this.deleteDatabase("ecoreciclaje.sqlite");
+        this.deleteDatabase("ecoreciclaje.sqlite");
 
         /*new Handler().postDelayed(new Runnable() {
             @Override
