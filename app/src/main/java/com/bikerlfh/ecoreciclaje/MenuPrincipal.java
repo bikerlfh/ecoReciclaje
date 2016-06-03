@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.bikerlfh.ecoreciclaje.Fragments.SitioReciclajeFragment;
 import com.bikerlfh.ecoreciclaje.R;
 
 import com.bikerlfh.ecoreciclaje.Fragments.InformacionFragment;
@@ -28,8 +29,9 @@ public class MenuPrincipal extends AppCompatActivity
                    InformacionFragment.OnFragmentInteractionListener,
                    TipsFragment.OnFragmentInteractionListener,
                    ManualidadFragment.OnFragmentInteractionListener,
-                   MaterialFragment.OnFragmentInteractionListener{
+                   MaterialFragment.OnFragmentInteractionListener , SitioReciclajeFragment.OnFragmentInteractionListener{
 
+    private FragmentTransaction transaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,7 @@ public class MenuPrincipal extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
+        fab.hide();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -54,6 +56,11 @@ public class MenuPrincipal extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        transaction = getSupportFragmentManager().beginTransaction();
+        InformacionFragment informacionFragment = new InformacionFragment();
+        transaction = transaction.replace(R.id.layout_principal,informacionFragment);
+        transaction.commit();
     }
 
     @Override
@@ -96,7 +103,7 @@ public class MenuPrincipal extends AppCompatActivity
 
         // Handle navigation view item clicks here.
         Intent intent = null;
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction = getSupportFragmentManager().beginTransaction();
         switch (item.getItemId())
         {
             case R.id.nav_informacion:
@@ -116,9 +123,11 @@ public class MenuPrincipal extends AppCompatActivity
                 transaction = transaction.replace(R.id.layout_principal,materialFragment);
             break;
             case R.id.nav_lugares:
+                SitioReciclajeFragment sitioReciclajeFragment = new SitioReciclajeFragment();
+                transaction = transaction.replace(R.id.layout_principal,sitioReciclajeFragment);
                 //MapsActivity mapsActivity = new MapsActivity();
-                intent = new Intent(MenuPrincipal.this, MapsActivity.class);
-                startActivity(intent);
+                /*intent = new Intent(MenuPrincipal.this, MapsActivity.class);
+                startActivity(intent);*/
 
             break;
         }

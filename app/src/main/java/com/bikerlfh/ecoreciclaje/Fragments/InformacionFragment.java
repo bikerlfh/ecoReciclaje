@@ -2,6 +2,7 @@ package com.bikerlfh.ecoreciclaje.Fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.tv.TvView;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bikerlfh.ecoreciclaje.Clases.TipoInformacion;
 import com.bikerlfh.ecoreciclaje.R;
 
 import com.bikerlfh.ecoreciclaje.Adapter.RvAdapterInformacion;
@@ -51,8 +53,18 @@ public class InformacionFragment extends Fragment {
         rvInformacion.setLayoutManager(llm);
         /******************* RecicleView *******************/
 
+        TipoInformacion tipoInformacion = new TipoInformacion(activity);
         Informacion informacion = new Informacion(activity);
-        Busqueda.ListadoInformacion = informacion.consultarTodoInformacion();
+        // consultamos el tipo de informacion 01 - NOTICIAS
+        if (tipoInformacion.consultarTipoInformacionPorCodigo("01")) {
+            // Se consultan todo la informacion de tipo 01- NOTICIAS
+            Busqueda.ListadoInformacion = informacion.consultarInformacionPorIdTipoInformacion(tipoInformacion.getIdTipoInformacion());
+        }
+        else {
+            // Si no se encuentra el tipo informacion 01 -NOTICIAS se carga la lista con todo el tipo de informacion
+            Busqueda.ListadoInformacion = informacion.consultarTodoInformacion();
+        }
+
         RvAdapterInformacion adapter = new RvAdapterInformacion(activity);
         rvInformacion.setAdapter(adapter);
         rvInformacion.setItemAnimator(new DefaultItemAnimator());

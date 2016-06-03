@@ -12,10 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-import com.bikerlfh.ecoreciclaje.R;
-
-import com.bikerlfh.ecoreciclaje.Clases.Busqueda;
 import com.bikerlfh.ecoreciclaje.Clases.SincronizarDatos;
 import com.bikerlfh.ecoreciclaje.Clases.SitioReciclaje;
 
