@@ -38,11 +38,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
+        // Se obtiene el parametro que se envio desde el RvAdapterListaMaterial
         int idMaterial = getIntent().getIntExtra(EXTRA_PARAMETER_ID_MATERIAL, 0);
         if(idMaterial > 0) {
+            // Se consultan los sitios que reciclen el material
             sitioReciclaje = new SitioReciclaje(this);
             ListadoSitioReciclaje = sitioReciclaje.ConsultarSitioReciclajePorIdMaterial(idMaterial);
+            // Se valida si no se encontraron sitios para mostrar el mensaje y cerrar el mapa
             if(ListadoSitioReciclaje.size() == 0)
             {
                 Material material = new Material(this);
@@ -53,6 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         else
         {
+            // si por alguina razon el idMaterial no es mayor a 0 se cierra el mapa.
             Toast.makeText(this,"Seleccione un material",Toast.LENGTH_SHORT).show();
             finish();
         }
@@ -119,6 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .snippet("Dir: " + sitio.getDireccion()+"\n"+"Tel: " + sitio.getTelefono())
                     /*.icon(BitmapDescriptorFactory.fromResource(R.drawable.recycling))*/);
         }
+        // Se utiliza el adpater SitioInfoWindowsAdapter para mostrar los Markers
         mMap.setInfoWindowAdapter(new SitioInfoWindowsAdapter(getLayoutInflater()));
     }
 }
