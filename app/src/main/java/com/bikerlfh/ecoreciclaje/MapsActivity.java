@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.bikerlfh.ecoreciclaje.Adapter.SitioInfoWindowsAdapter;
+import com.bikerlfh.ecoreciclaje.Clases.Material;
 import com.bikerlfh.ecoreciclaje.Clases.SitioReciclaje;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,6 +43,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(idMaterial > 0) {
             sitioReciclaje = new SitioReciclaje(this);
             ListadoSitioReciclaje = sitioReciclaje.ConsultarSitioReciclajePorIdMaterial(idMaterial);
+            if(ListadoSitioReciclaje.size() == 0)
+            {
+                Material material = new Material(this);
+                material.consultarMaterialPorId(idMaterial);
+                Toast.makeText(this,"No se encontrarón sitios para reciclar " + material.getNombre(),Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+        else
+        {
+            Toast.makeText(this,"Seleccione un material",Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 
