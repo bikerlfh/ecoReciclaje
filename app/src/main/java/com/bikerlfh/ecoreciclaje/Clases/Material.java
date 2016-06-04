@@ -182,7 +182,7 @@ public class Material {
         {
             case "01":
                 //Papel y Carton
-                imagen = R.drawable.ic_metal;
+                imagen = R.drawable.ic_inf;
                 break;
             case "02":
                 // Chatarra y metal
