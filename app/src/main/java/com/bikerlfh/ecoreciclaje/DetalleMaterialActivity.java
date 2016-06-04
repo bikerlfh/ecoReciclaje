@@ -2,6 +2,7 @@ package com.bikerlfh.ecoreciclaje;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class DetalleMaterialActivity extends AppCompatActivity {
         lblTipoMaterial = (TextView)findViewById(R.id.lbl_tipomaterial_detallematerial);
         lblTipoMaterial.setText("");
         lblDescripcion = (TextView)findViewById(R.id.lbl_descripcion_detallematerial);
+        lblDescripcion.setMovementMethod(new ScrollingMovementMethod());
         imgMaterial = (ImageView)findViewById(R.id.img_detallematerial);
 
         int idMaterial = getIntent().getIntExtra(EXTRA_PARAMETER_ID_MATERIAL, 0);
