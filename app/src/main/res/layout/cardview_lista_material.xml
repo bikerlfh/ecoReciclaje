@@ -6,11 +6,13 @@
     android:layout_height="wrap_content"
     card_view:cardUseCompatPadding="true"
     card_view:cardCornerRadius="8dp"
-    android:layout_marginBottom="16dp">
+    android:layout_marginBottom="16dp"
+    android:backgroundTint="#b4d7b9">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:foregroundTint="#b4d7b9">
 
         <ImageView
             android:id="@+id/img_cv_listamaterial"
@@ -24,15 +26,14 @@
             android:id="@+id/lbl_cv_titulo_listamaterial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
+            android:textSize="15sp"
             android:text="@string/title_titulo"
             android:textColor="@color/colorAccent"
             android:gravity="center"
             android:layout_below="@+id/img_cv_listamaterial"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorPrimaryDark"/>
+            android:layout_alignParentBottom="true" />
 
     </RelativeLayout>
 

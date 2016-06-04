@@ -52,9 +52,10 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textSize="20px"
+            android:textSize="40px"
             android:textColor="@color/abc_input_method_navigation_guard"
-            android:layout_below="@+id/lbl_tipomaterial_detallematerial" />
+            android:layout_below="@+id/lbl_tipomaterial_detallematerial"
+            android:textIsSelectable="false" />
 
         <TextView
             android:layout_width="wrap_content"

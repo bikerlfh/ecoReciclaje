@@ -36,9 +36,10 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/img_detallematerial"
                 android:layout_alignParentTop="true"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:text="@string/title_nombrematerial"
-                android:textColor="@android:color/holo_green_dark" />
+                android:textColor="#050505"
+                android:textStyle="normal|bold" />
 
         </RelativeLayout>
 

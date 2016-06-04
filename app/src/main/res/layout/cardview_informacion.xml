@@ -40,7 +40,8 @@
                 android:layout_alignParentTop="true"
                 android:textSize="15sp"
                 android:text="@string/title_titulo"
-                android:textColor="@android:color/holo_green_dark" />
+                android:textColor="#040404"
+                android:textStyle="normal|bold" />
 
 
             <TextView
@@ -50,7 +51,7 @@
                 android:layout_toRightOf="@+id/img_cv_informacion"
                 android:layout_below="@+id/lbl_cv_titulo_informacion"
                 android:text="@string/title_fecha"
-                android:textColor="@color/abc_input_method_navigation_guard" />
+                android:textColor="#ffffff" />
 
         </RelativeLayout>
 

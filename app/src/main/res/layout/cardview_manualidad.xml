@@ -39,7 +39,8 @@
                 android:layout_alignParentTop="true"
                 android:textSize="20sp"
                 android:text="@string/title_titulo"
-                android:textColor="@android:color/holo_green_dark" />
+                android:textColor="#010101"
+                android:textStyle="normal|bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,7 +50,7 @@
                 android:layout_alignBottom="@+id/img_cv_manualidad"
                 android:layout_alignLeft="@+id/lbl_cv_titulo_manualidad"
                 android:layout_alignStart="@+id/lbl_cv_titulo_manualidad"
-                android:textColor="@color/abc_input_method_navigation_guard" />
+                android:textColor="#ffffff" />
 
         </RelativeLayout>
 

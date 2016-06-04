@@ -52,7 +52,7 @@
         android:layout_alignEnd="@+id/lbl_titulo_detalleinformacion"
         android:textColor="@color/abc_search_url_text_pressed"
         android:layout_alignParentBottom="true"
-        android:textSize="20px"
+        android:textSize="30px"
         android:layout_below="@+id/lbl_material_detalleinformacion" />
 
     <TextView
