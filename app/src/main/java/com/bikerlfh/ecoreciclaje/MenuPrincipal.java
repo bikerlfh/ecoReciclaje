@@ -1,5 +1,6 @@
 package com.bikerlfh.ecoreciclaje;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -102,37 +103,37 @@ public class MenuPrincipal extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
 
         // Handle navigation view item clicks here.
-        Intent intent = null;
-        transaction = getSupportFragmentManager().beginTransaction();
+        //Intent intent = null;
+        // Objeto para cargar el fragment seleccionado
+        android.support.v4.app.Fragment newFragment = null;
         switch (item.getItemId())
         {
             case R.id.nav_informacion:
-                InformacionFragment informacionFragment = new InformacionFragment();
-                transaction = transaction.replace(R.id.layout_principal,informacionFragment);
+                newFragment = new InformacionFragment();
             break;
             case R.id.nav_tips:
-                TipsFragment tipsFragment = new TipsFragment();
-                transaction = transaction.replace(R.id.layout_principal,tipsFragment);
+                newFragment = new TipsFragment();
             break;
             case R.id.nav_manualidades:
-                ManualidadFragment manualidadFragment = new ManualidadFragment();
-                transaction = transaction.replace(R.id.layout_principal,manualidadFragment);
+                newFragment = new ManualidadFragment();
             break;
             case R.id.nav_reciclaje:
-                MaterialFragment materialFragment = new MaterialFragment();
-                transaction = transaction.replace(R.id.layout_principal,materialFragment);
+                newFragment = new MaterialFragment();
             break;
             case R.id.nav_lugares:
-                SitioReciclajeFragment sitioReciclajeFragment = new SitioReciclajeFragment();
-                transaction = transaction.replace(R.id.layout_principal,sitioReciclajeFragment);
-                //MapsActivity mapsActivity = new MapsActivity();
-                /*intent = new Intent(MenuPrincipal.this, MapsActivity.class);
-                startActivity(intent);*/
-
+                newFragment = new SitioReciclajeFragment();
             break;
         }
-        //startActivity(intent);
-        transaction.commit();
+        // Se valida que el fragment no este cargado
+        if (newFragment != null) {
+            // Se obtiene el fragment actualmente cargado
+            android.support.v4.app.Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.layout_principal);
+            // si no hay fragment cargado O el fragment cargado es diferente al nuevo
+            // se carga el fragment
+            if (currentFragment == null || !currentFragment.getClass().getName().equalsIgnoreCase(newFragment.getClass().getName())) {
+                loadFragment(newFragment);
+            }
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -142,5 +143,13 @@ public class MenuPrincipal extends AppCompatActivity
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    private void loadFragment(android.support.v4.app.Fragment newFragment)
+    {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.layout_principal, newFragment,newFragment.getClass().getName())
+                .addToBackStack("F_MAIN")
+                .commit();
     }
 }
