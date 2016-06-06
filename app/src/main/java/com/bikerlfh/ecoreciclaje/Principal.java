@@ -18,7 +18,6 @@ import com.bikerlfh.ecoreciclaje.Clases.SitioReciclaje;
 public class Principal extends AppCompatActivity {
 
     //private final int DURACION_SPLASH = 2000;
-    private SitioReciclaje sitioReciclaje;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +36,6 @@ public class Principal extends AppCompatActivity {
 
             ;
         }, DURACION_SPLASH);*/
-        sitioReciclaje = new SitioReciclaje(this);
         // Validamos el estado de internet
         if (isOnline())
             new AsyncSincronizar().execute("", "", "");
