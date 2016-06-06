@@ -7,6 +7,7 @@ import org.ksoap2.serialization.SoapObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by fercho on 5/22/2016.
@@ -28,21 +29,21 @@ public class SincronizarDatos
     private Departamento departamento;
     private Municipio municipio;
 
+    private String messageError;
+
     public SincronizarDatos(Context context)
     {
         this.context = context;
     }
 
-    public String SincronizarPais()
+    public String getMessageError(){ return this.messageError; }
+
+    public boolean SincronizarPais()
     {
         pais = new Pais(this.context);
         int ultimoId = pais.consultarMaxId();
         ListadoPropertyInfo = new ArrayList<>();
-        PropertyInfo prop = new PropertyInfo();
-        prop.setName("ultimoIdPais");
-        prop.setValue(ultimoId);
-        prop.setType(int.class);
-        ListadoPropertyInfo.add(prop);
+        addPopertyInfo("ultimoIdPais",ultimoId,int.class);
 
         response = webService.callWebService("sincronizarPais",ListadoPropertyInfo);
         if (response!= null && response.getPropertyCount() > 0)
@@ -57,60 +58,56 @@ public class SincronizarDatos
                     {
                         if(!pais.insertPais(Integer.parseInt(so.getProperty("idPais").toString()),so.getProperty("codigo").toString(),so.getProperty("descripcion").toString()))
                         {
-                            return "Error: al intentar insertar pais";
+                            this.messageError = "Error: al intentar insertar pais";
+                            return false;
                         }
                     }
                 }
-                return "true";
+                return true;
             }
         }
-        return "Error: No se encontraron datos en pais";
+        this.messageError = "Error: No se encontraron datos en pais";
+        return false;
     }
 
-    public String SincronizarDepartamento()
+    public Boolean SincronizarDepartamento()
     {
-    departamento = new Departamento(this.context);
-    int ultimoId = departamento.consultarMaxId();
-    ListadoPropertyInfo = new ArrayList<>();
-    PropertyInfo prop = new PropertyInfo();
-    prop.setName("ultimoIdDepartamento");
-    prop.setValue(ultimoId);
-    prop.setType(int.class);
-    ListadoPropertyInfo.add(prop);
+        departamento = new Departamento(this.context);
+        int ultimoId = departamento.consultarMaxId();
+        ListadoPropertyInfo = new ArrayList<>();
+        addPopertyInfo("ultimoIdDepartamento",ultimoId,int.class);
 
-    response = webService.callWebService("sincronizarDepartamento",ListadoPropertyInfo);
-    if (response!= null && response.getPropertyCount() > 0)
-    {
-        response = (SoapObject) ((SoapObject) response.getProperty(0)).getProperty("consulta");
-        if (response!=null)
+        response = webService.callWebService("sincronizarDepartamento",ListadoPropertyInfo);
+        if (response!= null && response.getPropertyCount() > 0)
         {
-            for (int i = 0; i < response.getPropertyCount(); i++)
+            response = (SoapObject) ((SoapObject) response.getProperty(0)).getProperty("consulta");
+            if (response!=null)
             {
-                SoapObject so = (SoapObject) response.getProperty(i);
-                if (so != null)
+                for (int i = 0; i < response.getPropertyCount(); i++)
                 {
-                    if(!departamento.insertDepartamento(Integer.parseInt(so.getProperty("idDepartamento").toString()),Integer.parseInt(so.getProperty("idPais").toString()),so.getProperty("codigo").toString(),so.getProperty("descripcion").toString()))
+                    SoapObject so = (SoapObject) response.getProperty(i);
+                    if (so != null)
                     {
-                        return "Error: al intentar insertar departamento";
+                        if(!departamento.insertDepartamento(Integer.parseInt(so.getProperty("idDepartamento").toString()),Integer.parseInt(so.getProperty("idPais").toString()),so.getProperty("codigo").toString(),so.getProperty("descripcion").toString()))
+                        {
+                            this.messageError = "Error: al intentar insertar departamento";
+                            return false;
+                        }
                     }
                 }
+                return true;
             }
-            return "true";
         }
+            this.messageError = "Error: No se encontraron datos en departamento";
+            return false;
     }
-    return "Error: No se encontraron datos en departamento";
-}
 
-    public String SincronizarMunicipio()
+    public Boolean SincronizarMunicipio()
     {
         municipio = new Municipio(this.context);
         int ultimoId = municipio.consultarMaxId();
         ListadoPropertyInfo = new ArrayList<>();
-        PropertyInfo prop = new PropertyInfo();
-        prop.setName("ultimoIdMunicipio");
-        prop.setValue(ultimoId);
-        prop.setType(int.class);
-        ListadoPropertyInfo.add(prop);
+        addPopertyInfo("ultimoIdMunicipio",ultimoId,int.class);
 
         response = webService.callWebService("sincronizarMunicipio",ListadoPropertyInfo);
         if (response!= null && response.getPropertyCount() > 0)
@@ -125,26 +122,24 @@ public class SincronizarDatos
                     {
                         if(!municipio.insertMunicipio(Integer.parseInt(so.getProperty("idMunicipio").toString()),Integer.parseInt(so.getProperty("idDepartamento").toString()),so.getProperty("codigo").toString(),so.getProperty("descripcion").toString()))
                         {
-                            return "Error: al intentar insertar Municipio";
+                            this.messageError = "Error: al intentar insertar Municipio";
+                            return false;
                         }
                     }
                 }
-                return "true";
+                return true;
             }
         }
-        return "Error: No se encontraron datos en Municipio";
+        this.messageError = "Error: No se encontraron datos en Municipio";
+        return false;
     }
 
-    public String SincronizarTipoInformacion()
+    public Boolean SincronizarTipoInformacion()
     {
         tipoInformacion = new TipoInformacion(this.context);
-        int ultimoIdTipoInformacion = tipoInformacion.consultarMaxId();
+        int ultimoId = tipoInformacion.consultarMaxId();
         ListadoPropertyInfo = new ArrayList<>();
-        PropertyInfo prop = new PropertyInfo();
-        prop.setName("ultimoIdTipoInformacion");
-        prop.setValue(ultimoIdTipoInformacion);
-        prop.setType(int.class);
-        ListadoPropertyInfo.add(prop);
+        addPopertyInfo("ultimoIdTipoInformacion",ultimoId,int.class);
 
         response = webService.callWebService("sincronizarTipoInformacion",ListadoPropertyInfo);
         if (response!= null && response.getPropertyCount() > 0)
@@ -160,26 +155,24 @@ public class SincronizarDatos
                     {
                         if(!tipoInformacion.insertTipoInformacion(Integer.parseInt(so.getProperty("idTipoInformacion").toString()),so.getProperty("codigo").toString(),so.getProperty("descripcion").toString()))
                         {
-                            return "Error: al intentar insertar tipo informacion";
+                            this.messageError = "Error: al intentar insertar tipo informacion";
+                            return false;
                         }
                     }
                 }
-                return "true";
+                return true;
             }
         }
-        return "Error: No se encontraron datos en tipo información";
+        this.messageError = "Error: No se encontraron datos en tipo información";
+        return false;
     }
 
-    public String SincronizarTipoMaterial()
+    public Boolean SincronizarTipoMaterial()
     {
         tipoMaterial = new TipoMaterial(this.context);
-        int ultimoIdTipoMaterial = tipoInformacion.consultarMaxId();
+        int ultimoId = tipoInformacion.consultarMaxId();
         ListadoPropertyInfo = new ArrayList<>();
-        PropertyInfo prop = new PropertyInfo();
-        prop.setName("ultimoIdTipoMaterial");
-        prop.setValue(ultimoIdTipoMaterial);
-        prop.setType(int.class);
-        ListadoPropertyInfo.add(prop);
+        addPopertyInfo("ultimoIdTipoMaterial",ultimoId,int.class);
 
         response = webService.callWebService("sincronizarTipoMaterial",ListadoPropertyInfo);
         if (response!= null && response.getPropertyCount() > 0)
@@ -195,26 +188,24 @@ public class SincronizarDatos
                     {
                         if(!tipoMaterial.insertTipoMaterial(Integer.parseInt(so.getProperty("idTipoMaterial").toString()),so.getProperty("codigo").toString(),so.getProperty("descripcion").toString()))
                         {
-                            return "Error: al intentar insertar tipo material";
+                            this.messageError = "Error: al intentar insertar tipo material";
+                            return false;
                         }
                     }
                 }
-                return "true";
+                return true;
             }
         }
-        return "Error: No se encontraron datos en tipo material";
+        this.messageError = "Error: No se encontraron datos en tipo material";
+        return false;
     }
 
-    public String SincronizarInformacion()
+    public Boolean SincronizarInformacion()
     {
         informacion = new Informacion(this.context);
         int ultimoId = informacion.consultarMaxId();
         ListadoPropertyInfo = new ArrayList<>();
-        PropertyInfo prop = new PropertyInfo();
-        prop.setName("ultimoIdInformacion");
-        prop.setValue(ultimoId);
-        prop.setType(int.class);
-        ListadoPropertyInfo.add(prop);
+        addPopertyInfo("ultimoIdInformacion",ultimoId,int.class);
 
         response = webService.callWebService("sincronizarInformacion",ListadoPropertyInfo);
         if (response!= null && response.getPropertyCount() > 0)
@@ -234,26 +225,24 @@ public class SincronizarDatos
                                                           so.getProperty("descripcion").toString(),
                                                           so.getProperty("fecha").toString()))
                         {
-                            return "Error: al intentar insertar información";
+                            this.messageError = "Error: al intentar insertar información";
+                            return false;
                         }
                     }
                 }
-                return "true";
+                return true;
             }
         }
-        return "Error: No se encontraron datos en información";
+        this.messageError = "Error: No se encontraron datos en información";
+        return false;
     }
 
-    public String SincronizarMaterial()
+    public Boolean SincronizarMaterial()
     {
         material = new Material(this.context);
         int ultimoId = material.consultarMaxId();
         ListadoPropertyInfo = new ArrayList<>();
-        PropertyInfo prop = new PropertyInfo();
-        prop.setName("ultimoIdMaterial");
-        prop.setValue(ultimoId);
-        prop.setType(int.class);
-        ListadoPropertyInfo.add(prop);
+        addPopertyInfo("ultimoIdMaterial",ultimoId,int.class);
 
         response = webService.callWebService("sincronizarMaterial",ListadoPropertyInfo);
         if (response!= null && response.getPropertyCount() > 0)
@@ -272,26 +261,24 @@ public class SincronizarDatos
                                 so.getProperty("nombre").toString(),
                                 so.getProperty("descripcion").toString()))
                         {
-                            return "Error: al intentar insertar materiales";
+                            this.messageError = "Error: al intentar insertar materiales";
+                            return false;
                         }
                     }
                 }
-                return "true";
+                return true;
             }
         }
-        return "Error: No se encontraron datos en materiales";
+        this.messageError = "Error: No se encontraron datos en materiales";
+        return false;
     }
 
-    public String SincronizarSitioReciclaje()
+    public Boolean SincronizarSitioReciclaje()
     {
         sitioReciclaje = new SitioReciclaje(this.context);
         int ultimoId = sitioReciclaje.consultarMaxId();
         ListadoPropertyInfo = new ArrayList<>();
-        PropertyInfo prop = new PropertyInfo();
-        prop.setName("ultimoIdSitioReciclaje");
-        prop.setValue(ultimoId);
-        prop.setType(int.class);
-        ListadoPropertyInfo.add(prop);
+        addPopertyInfo("ultimoIdSitioReciclaje",ultimoId,int.class);
 
         response = webService.callWebService("sincronizarSitioReciclaje",ListadoPropertyInfo);
         if (response!= null && response.getPropertyCount() > 0)
@@ -312,25 +299,23 @@ public class SincronizarDatos
                                 Double.parseDouble(so.getProperty("latitud").toString()),
                                 Double.parseDouble(so.getProperty("longitud").toString())))
                         {
-                            return "Error: al intentar insertar sitio de reciclaje";
+                            this.messageError = "Error: al intentar insertar sitio de reciclaje";
+                            return false;
                         }
                     }
                 }
-                return "true";
+                return true;
             }
         }
-        return "Error: No se encontraron datos en sitio de reciclaje";
+        this.messageError = "Error: No se encontraron datos en sitio de reciclaje";
+        return false;
     }
-    public String SincronizarSitioReciclajeMaterial()
+    public Boolean SincronizarSitioReciclajeMaterial()
     {
         sitioReciclajeMaterial = new SitioReciclajeMaterial(this.context);
         int ultimoId = sitioReciclajeMaterial.consultarMaxId();
         ListadoPropertyInfo = new ArrayList<>();
-        PropertyInfo prop = new PropertyInfo();
-        prop.setName("ultimoIdSitioReciclajeMaterial");
-        prop.setValue(ultimoId);
-        prop.setType(int.class);
-        ListadoPropertyInfo.add(prop);
+        addPopertyInfo("ultimoIdSitioReciclajeMaterial",ultimoId,int.class);
 
         response = webService.callWebService("sincronizarSitioReciclajeMaterial",ListadoPropertyInfo);
         if (response!= null && response.getPropertyCount() > 0)
@@ -347,13 +332,25 @@ public class SincronizarDatos
                                 Integer.parseInt(so.getProperty("idMaterial").toString()),
                                 Long.parseLong(so.getProperty("idSitioReciclaje").toString())))
                         {
-                            return "Error: al intentar insertar sitio de reciclaje Material";
+                            this.messageError = "Error: al intentar insertar sitio de reciclaje Material";
+                            return false;
                         }
                     }
                 }
-                return "true";
+                return true;
             }
         }
-        return "Error: No se encontraron datos en sitio de reciclaje Material";
+        this.messageError = "Error: No se encontraron datos en sitio de reciclaje Material";
+        return false;
+    }
+
+    private void addPopertyInfo(String name, Object value, Object type){
+        if(ListadoPropertyInfo == null)
+            ListadoPropertyInfo = new ArrayList<>();
+        PropertyInfo propertyInfo = new PropertyInfo();
+        propertyInfo.setName(name);
+        propertyInfo.setValue(value);
+        propertyInfo.setType(type);
+        ListadoPropertyInfo.add(propertyInfo);
     }
 }

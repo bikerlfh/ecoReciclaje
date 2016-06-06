@@ -72,11 +72,11 @@ public class Principal extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    class AsyncSincronizar extends AsyncTask<String,String,String>
+    class AsyncSincronizar extends AsyncTask<String,String,Boolean>
     {
         ProgressDialog pd = new ProgressDialog(Principal.this);
         SincronizarDatos sincronizarDatos = new SincronizarDatos(Principal.this);
-        String resultado = "",resultadoSincronizacion;
+        String resultado = "";
         @Override
         protected void onPreExecute() {
             pd.setMessage("Sincronizando Datos ...");
@@ -86,68 +86,69 @@ public class Principal extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(String... params) {
+        protected Boolean doInBackground(String... params) {
+            Boolean retorno = true;
             // sincroniza pais
-            resultadoSincronizacion = sincronizarDatos.SincronizarPais();
-            if (resultadoSincronizacion.contains("Error"))
+            if (!sincronizarDatos.SincronizarPais())
             {
-                resultado = resultadoSincronizacion + ". ";
+                resultado = sincronizarDatos.getMessageError()+ ". ";
+                retorno = false;
             }
             // sincroniza departamento
-            resultadoSincronizacion = sincronizarDatos.SincronizarDepartamento();
-            if (resultadoSincronizacion.contains("Error"))
+            if (!sincronizarDatos.SincronizarDepartamento())
             {
-                resultado = resultadoSincronizacion + ". ";
+                resultado += sincronizarDatos.getMessageError()+ ". ";
+                retorno = false;
             }
             // sincroniza municipio
-            resultadoSincronizacion = sincronizarDatos.SincronizarMunicipio();
-            if (resultadoSincronizacion.contains("Error"))
+            if (!sincronizarDatos.SincronizarMunicipio())
             {
-                resultado = resultadoSincronizacion + ". ";
+                resultado += sincronizarDatos.getMessageError()+ ". ";
+                retorno = false;
             }
             // sincroniza tipo informacion
-            resultadoSincronizacion = sincronizarDatos.SincronizarTipoInformacion();
-            if (resultadoSincronizacion.contains("Error"))
+            if (!sincronizarDatos.SincronizarTipoInformacion())
             {
-                resultado = resultadoSincronizacion + ". ";
+                resultado += sincronizarDatos.getMessageError()+ ". ";
+                retorno = false;
             }
             // sincroniza tipo material
-            resultadoSincronizacion = sincronizarDatos.SincronizarTipoMaterial();
-            if (resultadoSincronizacion.contains("Error"))
+            if (!sincronizarDatos.SincronizarTipoMaterial())
             {
-                resultado += resultadoSincronizacion+ ". ";
+                resultado += sincronizarDatos.getMessageError()+ ". ";
+                retorno = false;
             }
             // sincroniza informacion
-            resultadoSincronizacion = sincronizarDatos.SincronizarInformacion();
-            if (resultadoSincronizacion.contains("Error"))
+            if (!sincronizarDatos.SincronizarInformacion())
             {
-                resultado += resultadoSincronizacion+ ". ";
+                resultado += sincronizarDatos.getMessageError()+ ". ";
+                retorno = false;
             }
             // sincroniza material
-            resultadoSincronizacion = sincronizarDatos.SincronizarMaterial();
-            if (resultadoSincronizacion.contains("Error"))
+            if (!sincronizarDatos.SincronizarMaterial())
             {
-                resultado += resultadoSincronizacion+ ". ";
+                resultado += sincronizarDatos.getMessageError()+ ". ";
+                retorno = false;
             }
             // sincroniza sitio reciclaje
-            resultadoSincronizacion = sincronizarDatos.SincronizarSitioReciclaje();
-            if (resultadoSincronizacion.contains("Error"))
+            if (!sincronizarDatos.SincronizarSitioReciclaje())
             {
-                resultado += resultadoSincronizacion+ ". ";
+                resultado += sincronizarDatos.getMessageError()+ ". ";
+                retorno = false;
             }
             // sincroniza sitio reciclaje material
-            resultadoSincronizacion = sincronizarDatos.SincronizarSitioReciclajeMaterial();
-            if (resultadoSincronizacion.contains("Error"))
+            if (!sincronizarDatos.SincronizarSitioReciclajeMaterial())
             {
-                resultado += resultadoSincronizacion+ ". ";
+                resultado += sincronizarDatos.getMessageError()+ ". ";
+                retorno = false;
             }
-            return null;
+            return retorno;
         }
 
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(Boolean proceso) {
             pd.dismiss();
-            if (resultado.length() == 0)
+            if (proceso)
                 resultado = "Proceso de sincronización completado";
             Toast.makeText(Principal.this,resultado,Toast.LENGTH_SHORT).show();
 
