@@ -168,7 +168,7 @@ public class Informacion
         List<Informacion> ListadoInformacion = new ArrayList<Informacion>();
         // Se realiza la consulta a la base de datos.
         // Indicamos que nos traiga todos los campos y con un order By del COLUMN_ID
-        Cursor c = dbManager.Select(InformacionModel.NAME_TABLE, new String[] { "*" },InformacionModel.COLUMN_ID_TIPO_INFORMACION+"=?",new String[] {String.valueOf(idTipoInformacion)},null,null,InformacionModel.COLUMN_ID,null);
+        Cursor c = dbManager.Select(InformacionModel.NAME_TABLE, new String[] { "*" },InformacionModel.COLUMN_ID_TIPO_INFORMACION+"=?",new String[] {String.valueOf(idTipoInformacion)},null,null,InformacionModel.COLUMN_FECHA + " DESC",null);
         // Si hay informacion
         if (c.moveToFirst())
         {
