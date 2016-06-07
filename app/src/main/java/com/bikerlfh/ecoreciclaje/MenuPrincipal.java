@@ -58,10 +58,8 @@ public class MenuPrincipal extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        transaction = getSupportFragmentManager().beginTransaction();
         InformacionFragment informacionFragment = new InformacionFragment();
-        transaction = transaction.replace(R.id.layout_principal,informacionFragment);
-        transaction.commit();
+        loadFragment(informacionFragment);
     }
 
     @Override
