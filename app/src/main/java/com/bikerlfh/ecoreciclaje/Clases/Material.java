@@ -182,39 +182,39 @@ public class Material {
         {
             case "01":
                 //Papel y Carton
-                imagen = R.drawable.ic_inf;
+                imagen = R.drawable.ic_papel_carton;
                 break;
             case "02":
                 // Chatarra y metal
-                imagen = R.drawable.ic_inf;
+                imagen = R.drawable.ic_metal;
                 break;
             case "03":
                 //Pilas y baterias
-                imagen = R.drawable.ic_inf;
+                imagen = R.drawable.ic_bateria;
                 break;
             case "04":
                 //Pinturas y aceites
-                imagen = R.drawable.ic_inf;
+                imagen = R.drawable.ic_pintura;
                 break;
             case "05":
                 //Plastico
-                imagen = R.drawable.ic_inf;
+                imagen = R.drawable.ic_plastico;
                 break;
             case "06":
                 //Vidrios
-                imagen = R.drawable.ic_inf;
+                imagen = R.drawable.ic_cristal;
                 break;
-            case "07  ":
+            case "07":
                 //Textiles
-                imagen = R.drawable.ic_inf;
+                imagen = R.drawable.ic_textiles;
                 break;
             case "08":
                 //Organico
-                imagen = R.drawable.ic_inf;
+                imagen = R.drawable.ic_organico;
                 break;
             case "09":
                 //Medicamentos
-                imagen = R.drawable.ic_inf;
+                imagen = R.drawable.ic_medicamento;
                 break;
 
         }
